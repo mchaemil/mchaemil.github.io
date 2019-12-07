@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Manage Collection, Module, Except, Manage File
+title: [Python]Manage Collection, Module, Except, Manage File
 mathjax: true
 tags: python
 ---
