@@ -3,7 +3,24 @@ layout: article
 title: Python/Manage Collection, Module, Except, Manage File
 mathjax: true
 tags: python
+
 ---
+
+**Today What I Learend**  
+파이썬의 컬렉션을 관리하는 고급 기법, import를 통해 수학, random, 시간 관련 모듈을 활용하는 방법 및 직접 모듈을 만들어보는 법, 
+프로그래밍의 꽃인 예외를 작성하는 법, 파일 입출력 등을 학습했다. 
+
+프로그래밍의 본질에 가깝지는 않지만 복작한 작업을 더 간단하게 해주고, 실수를 줄여주는 다양한 도구들을 익히는 시간을 가졌다.
+
+---
+**Today I Learend**
+- Manage Collection
+- Module
+- Except
+- Manage File
+
+---
+
 
 ### 컬렉션 관리 함수
 
