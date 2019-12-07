@@ -2,6 +2,7 @@
 layout: article
 title: My first commit & class
 mathjax: true
+mathjax_autoNumber: true
 ---
 
 으쌰으쌰...
@@ -45,3 +46,9 @@ Posting Test
   "options": {}
 }
 ```
+
+When $$a \ne 0$$, there are two solutions to $$ax^2 + bx + c = 0$$ and they are
+$$x_1 = {-b + \sqrt{b^2-4ac} \over 2a}$$
+$$x_2 = {-b - \sqrt{b^2-4ac} \over 2a} \notag$$
+
+
