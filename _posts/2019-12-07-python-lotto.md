@@ -1,9 +1,12 @@
 ---
+
 layout: article
 title: [Python]Lotto Generator
 mathjax: true
 tags: python
+
 ---
+
 
 ## Python으로 Lotto Generator 만드는 법
 
@@ -12,7 +15,8 @@ tags: python
 
 
 ---
-Lotto Generator 만드는 방법
+
+**Lotto Generator 만드는 방법**
 
 - 기본적인 구문을 사용하는 방법
 - 조금은 개선된 방법 shuffle 함수 사용(완벽한 랜덤을 위해서)
