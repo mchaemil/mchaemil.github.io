@@ -5,7 +5,8 @@ mathjax: true
 tags: python
 ---
 
-### 컬렉션 관리 함수
+# 파이썬으로 로또 생성기를 만드는 방법
 
-여러개의 값을 저장하는 컬렉션은 관리하는 방법이 비슷한데, 그 중 컬렉션을 관리하는 함수는 enumerate, lambda 등이 있다.
-2019-12-06-python-collection-module-except-file.md
+- 기본적인 구문을 사용해서 생성하는 방법
+- 조금은 개선된 방법? shuffle 사용?
+- set 자료형을 사용한 방법?
