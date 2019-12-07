@@ -1,10 +1,8 @@
 ---
-
 layout: article
-title: [Python]Lotto Generator
+title: Python Lotto Generator
 mathjax: true
 tags: python
-
 ---
 
 
