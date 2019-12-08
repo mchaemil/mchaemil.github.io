@@ -50,7 +50,7 @@ Posting Test
 
 ```chart
 {
-	{
+
     type: 'bar',
     data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
