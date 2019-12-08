@@ -15,6 +15,36 @@ mathjax: true
 #### 4. 찾아낸 값을 반환하자!
 ---
 
+### 조건문을 통해 각요소를 검사해서 해결하는 방법
+
+```mermaid
+graph TB;
+    A[인자를 개수 제한 없이 받을 수 있는 함수를 생성]
+    B[max 지역변수에 첫번째 값을 담고, for문을 통해 다른 값들과 순차적으로 비교]
+    C[비교값 보다 크다면 max지역변수에 대입]
+    D[비교값 보다 작다면 다음 요소의 값과 비교]
+    E[가장 큰 값을 return]
+    A--yes-->B;
+    B--yes-->C;
+    B--no-->D;
+    C--yes-->E;
+```
+
+```python
+# 전체 코드
+def score_max(*s):
+  max = s[0]
+  for num in s:
+    if max < num:
+      max = num
+  return max
+
+print(score_max(10, 20, 30, 23, 1, 100, 21, 230)) # 230
+```
+
+
+### 배열의 내장함수를 이용한 해결 방법
+
 ```mermaid
 graph TB;
     A[인자를 개수 제한 없이 받을 수 있는 함수를 생성]
@@ -25,9 +55,6 @@ graph TB;
 ```
 
 ```python
-print('==== 문제 풀기 ====')
-
-
 # 1. 함수를 생성하세요.
 def input_func():
 
