@@ -180,13 +180,68 @@ print(statistics.median(score)) # 중앙값: 30
 1970년 1월 1일을 기준으로 경과한 시간을 초단위로 표현한다.
 
 ```python
+import time
+now = time.localtime()
+print('%d년 %d월 %d일' % (now.tm_year, now.tm_mon, now.tm_mday))
+# # 2019년 12월 9일
 
+import datetime
+
+now = datetime.datetime.now()
+print('%d년 %d월 %d일' % (now.year, now.month, now.day))
+print('%d:%d:%d' % (now.hour, now.minute, now.second))
+# 2019년 12월 9일
+# 0:14:26
+```
+
+** 타임함수를 이용해 함수 실행시간을 측정할 수 있다.** 
+
+프로그램의 실행이 느릴 때 타입함수를 통해서 각 함수의 실행시간을 측정할 수 있다. 
+
+```python
+import time
+
+start = time.time()
+for a in range(1000):
+  print(a)
+end = time.time()
+print(end - start)
+```
+
+#### calendar module 
+calendar 모듈을 활용해 특정 날짜가 무슨 요일인지 확인해보기
+
+```python
+import calendar
+
+day = ["월", "화", "수", "목", "금", "토", "일"]
+tree_day = calendar.weekday(2019, 4, 5)
+print('tree day is %s요일입니다.' % day[tree_day])
+```
+
+#### sys module 
+
+```python
+import sys
+
+print(sys.version) # 파이썬 버젼
+print('===')
+sys.exit() # 프로그램을 강제 종료할 때 사용하는 메소드
+```
+
+```python
+
+
+```
+```python
 
 
 ```
 
 
+```python
 
 
+```
 
 
