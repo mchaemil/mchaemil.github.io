@@ -27,6 +27,7 @@ graph TB;
     A--yes-->B;
     B--yes-->C;
     B--no-->D;
+    C--no-->B;	
     C--yes-->E;
 ```
 
