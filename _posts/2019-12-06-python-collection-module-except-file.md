@@ -6,7 +6,7 @@ tags: python
 
 ---
 
-**Today What I Learend**  
+## **Today What I Learend**  
 파이썬의 컬렉션을 관리하는 고급 기법, import를 통해 수학, random, 시간 관련 모듈을 활용하는 방법 및 직접 모듈을 만들어보는 법, 
 프로그래밍의 꽃인 예외를 작성하는 법, 파일 입출력 등을 학습했다. 
 
@@ -123,5 +123,70 @@ print(list1) # [1,2,3]
 print(list2) # [[1,2,3], 4, 5]
 print(list3) # [[1,99,3], 4, 5]
 ```
+
+### 모듈(Module) 
+
+자주 사용하는 기능들은 이미 표준 모듈로 만들어져 있는데, 대표적으로 수학, 난수, 시간 관련 모듈이 있다. 모듈을 사용할 때는 `import`명령을 사용한다. 
+
+- math 
+- statistics
+- time
+	- **실행 시간 측정**
+- random 
+- sys 모듈
+
+
+#### Math module 
+
+```python
+import math # math 모듈에 작성된 모든 상수와 함수르 다 가져온다.
+print(math.sqrt(2)) # 1.41421356...
+```
+
+- 특정 함수만 import 할 때에는 아래 구문 사용
+	- 함수를 import할 경우는 함수명으로 바로 호출가능하다.
+
+```python
+from math import sqrt # math 모듈에 작성된 모든 상수와 함수르 다 가져온다.
+print(sqrt(2)) # 1.41421356...
+```
+
+
+#### random module 
+
+```python
+import random
+
+random_number = random.randint(1,46)
+print(random_number) # 1 ~ 45 사이의 난수
+```
+
+#### statistics module 
+
+평균, 분산 등의 통계값을 계산하며, 정확한 값을 구하기 위해서 사용하는 모듈이다. 
+
+```python
+import statistics
+
+score = [10, 20, 30, 40, 50]
+print(statistics.mean(score)) # 평균값: 30
+print(statistics.harmonic_mean(score)) # 조화평균: 21.8978102189781
+print(statistics.median(score)) # 중앙값: 30
+```
+
+#### time module 
+
+날짜와 시간 관련 기능을 제공하며, 대표 함수로는 `time`이 있다. 
+1970년 1월 1일을 기준으로 경과한 시간을 초단위로 표현한다.
+
+```python
+
+
+
+```
+
+
+
+
 
 
