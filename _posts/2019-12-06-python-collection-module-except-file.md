@@ -16,7 +16,7 @@ tags: python
 **Today I Learend**
 - Manage Collection
 - Module
-- Except
+- Eexception handling
 - Manage File
 
 ---
@@ -229,10 +229,27 @@ print('===')
 sys.exit() # 프로그램을 강제 종료할 때 사용하는 메소드
 ```
 
+### 예외처리(Eexception handling)
+사용자와 상호작용을 하는 와중에 발생할 수도 있는 오류에 대비하기 위해서 발생 가능한 예외를 모두 준비하기 위해 예외처리를 사용한다.
+
+#### 예외의 종류
+- NameError
+- ValueError
+- ZeroDivisionError
+- TypeError
+
+
 ```python
-
-
+try:
+	수행할 명령
+except:
+	오류 처리 구문
+else:
+	예외가 발생하지 않을 때 수행할 처리
 ```
+
+
+
 ```python
 
 
