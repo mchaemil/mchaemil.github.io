@@ -24,9 +24,6 @@ graph TB;
     B--yes-->C;    
 ```
 
-
-
-
 ```python
 print('==== 문제 풀기 ====')
 
@@ -48,7 +45,6 @@ list_data.sort()
 return list_data[-1]
 ```
 
-
 ```python
 # 전체 코드
 def input_func(*args):
@@ -60,6 +56,9 @@ def input_func(*args):
 
 print(input_func(10, 230, 40, 30, 20, 5)) # 230
 
-
 ```
+
+
+
+
 

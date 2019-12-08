@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Python Lotto Generator
+title: Python/Lotto Generator
 mathjax: true
 tags: python
 ---
@@ -17,8 +17,9 @@ tags: python
 **Lotto Generator 만드는 방법**
 
 - 기본적인 구문을 사용하는 방법
-- 조금은 개선된 방법 shuffle 함수 사용(완벽한 랜덤을 위해서)
-- set 자료형을 사용한 방법?(중복을 허용하지 않는 자료형)
+- in연산자를 활용한 파이썬스러운 문법
+- 조금은 개선된 방법 shuffle 함수 사용(더 나은 랜덤을 위해서)
+- set 자료형을 사용한 방법(중복을 허용하지 않는 자료형)을 고민해보는 중...
 
 ---
 
@@ -49,9 +50,35 @@ for i in lottoNumbers:
 # 13, 34, 1, 5, 45, 21,
 ```
 
-### 조금은 개선된 방법 shuffle 함수 사용
+### in연산자를 활용한 파이썬스러운 문법
 
 ```python
+import random
 
+lotto = []
+while True:
+	if len(lotto) == 6:
+		break
+	num = random.randint(1, 45)
+	if num in lotto:
+		continue
+	else:
+		lotto.append(num)
 
+print(lotto) # [13, 34, 1, 5, 45, 21]
 ```
+
+### random 모듈의 shuffle 함수를 사용한 방법
+shuffle은 리스트내의 요소를 무작위로 섞는 함수이다. 
+
+```python
+import random
+
+lotto = [x for x in range(1, 46)]
+random.shuffle(lotto)
+for i in range(6):
+	print(lotto.pop(), end=' ') # 9 24 14 10 26 44
+```
+
+
+
