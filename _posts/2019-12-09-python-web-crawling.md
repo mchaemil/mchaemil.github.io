@@ -163,18 +163,19 @@ crwal_data()
 graph TB;
     A[페이징하며 게시글의 내용을 수집하는 innogov_crw 함수를 호출]
 	B[innogov_crw 함수가 page함수를 호출하고, page 함수가 detail 함수를 호출]
-    B[reqeusts 라이브러리를 통해서 크롤링할 페이지 주소의 쿼리문에 사용자 정의 HTML을 전달]
-	C[BeautifulSoup의 인자로 크롤링할 사용자 정의 HTML 데이터와 파싱 방법을 전달]    
-    D[BeautifulSoup 객체의 findAll과 find 함수를 사용하여 게시판의 제목, 본문에 관한 태그를 필터링]	
-	E[게시글의 제목이 존재하지 않는다면?]
-	F[작업을 종료하고 데이터를 엑셀로 출력]
-	G[게시글의 제목이 존재하지 않을 때까지 실행흐름을 지속]	
+    C[reqeusts 라이브러리를 통해서 크롤링할 페이지 주소의 쿼리문에 사용자 정의 HTML을 전달]
+	D[BeautifulSoup의 인자로 크롤링할 사용자 정의 HTML 데이터와 파싱 방법을 전달]    
+    E[BeautifulSoup 객체의 findAll과 find 함수를 사용하여 게시판의 제목, 본문에 관한 태그를 필터링]	
+	F[게시글의 제목이 존재하지 않는다면?]
+	G[작업을 종료하고 데이터를 엑셀로 출력]
+	H[게시글의 제목이 존재하지 않을 때까지 innogov_crw 함수 실행을 지속]	
     A--yes-->B;
     B--yes-->C;
     C--yes-->D;	
     D--yes-->E;
     E--yes-->F;
-    E--no-->G;	
+	F--yes-->G;
+    F--no-->H;	
 	
 ```
 
