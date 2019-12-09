@@ -53,7 +53,7 @@ print(request_status.text) # naver의 html
 ```mermaid
 graph TB;
     A[Crawling 할 때 필요한 라이브러리 import]
-    B[reqeusts 라이브러리를 통해서 크롤링할 HTML 페이지 요청]
+    B[reqeusts 라이브러리를 통해서 크롤링할 HTML 페이지 전달]
 	C[BeautifulSoup의 인자로 크롤링할 HTML 데이터와 파싱 방법을 전달한다.]    
     D[BeautifulSoup 객체의 findAll과 find 함수를 사용하여 원하는 태그를 필터링하고]
 	E[데이터를 추출]
@@ -83,7 +83,7 @@ html = """
 
 # BeautifulSoup 객체를 변수에 할당
 bs_object = bs4.BeautifulSoup(html, 'html.parser')
-# BeautifulSoup 객체를 통해 찾은 태그를 변수에 할당
+# BeautifulSoup 객체의 findAll메서드를 통해 찾은 태그를 변수에 할당
 h1_tag = bs_object.findAll('h1')
 
 # 중복된 태그이므로 for문으로 각 요소들을 순회하면서 태그에 담긴 데이터를 출력
@@ -102,7 +102,7 @@ for tag in h1_tag:
 ```mermaid
 graph TB;
     A[Crawling 을 위해 필요한 라이브러리 import]
-    B[reqeusts 라이브러리를 통해서 크롤링할 페이지 주소의 쿼리문에 변수와 연산자를 통해 사용자 정의 HTML을 요청]
+    B[reqeusts 라이브러리를 통해서 크롤링할 페이지 주소의 쿼리문에 변수와 연산자를 통해 사용자 정의 HTML을 전달]
 	C[BeautifulSoup의 인자로 크롤링할 사용자 정의 HTML 데이터와 파싱 방법을 전달]    
     D[BeautifulSoup 객체의 findAll과 find 함수를 사용하여 지역, 온도, 대기 등에 관한 태그를 필터링하고]
 	E[데이터를 추출]
@@ -129,13 +129,13 @@ def crwal_data():
     if html.status_code == 200:
 		# BeautifulSoup의 인자로 크롤링할 사용자 정의 HTML 데이터와 파싱 방법을 전달
         bs_object = bs4.BeautifulSoup(html.text, 'html.parser')
-		
-        # BeautifulSoup 객체의 함수 find 를 이용해 지역 데이터 추출 
+
+        # BeautifulSoup 객체의 메서드 find 를 이용해 지역 데이터 추출 
 		address = bs_object.find('span', {'class': 'btn_select'})
         temp = bs_object.find('span', {'class': 'todaytemp'})
         print('온도: ', user_addr, temp.text)
 		
-		# BeautifulSoup 객체의 함수 find 를 이용해 대기정보 데이터 추출 
+		# BeautifulSoup 객체의 메서드 find 를 이용해 대기정보 데이터 추출 
 		indicator_tag = bs_object.find('dl', {'class': 'indicator'})
         dd_tags = indicator_tag.findAll('span', {'class': 'num'})
         text_dd = ['미세먼지', '초미세먼지', '오존지수']
@@ -155,7 +155,102 @@ crwal_data()
 ```
 
 
+
+### Crawling - 정부부처 사이트 게시판 읽어오기
+
+
+```mermaid
+graph TB;
+    A[페이징하며 게시글의 내용을 수집하는 innogov_crw 함수를 호출]
+	B[innogov_crw 함수가 page함수를 호출하고, page 함수가 detail 함수를 호출]
+    B[reqeusts 라이브러리를 통해서 크롤링할 페이지 주소의 쿼리문에 사용자 정의 HTML을 전달]
+	C[BeautifulSoup의 인자로 크롤링할 사용자 정의 HTML 데이터와 파싱 방법을 전달]    
+    D[BeautifulSoup 객체의 findAll과 find 함수를 사용하여 게시판의 제목, 본문에 관한 태그를 필터링]	
+	E[게시글의 제목이 존재하지 않는다면?]
+	F[작업을 종료하고 데이터를 엑셀로 출력]
+	G[게시글의 제목이 존재하지 않을 때까지 실행흐름을 지속]	
+    A--yes-->B;
+    B--yes-->C;
+    C--yes-->D;	
+    D--yes-->E;
+    E--yes-->F;
+    E--no-->G;	
+	
+```
+
+
 ```python
+# Crawling과 excel로 데이터 출력을 위해 필요한 라이브러리 import
+import requests
+import bs4
+import pandas
+
+# 게시글의 제목과 내용을 담아올 리스트 변수 선언
+title_list = []
+detail_list = []
+
+def detail(url):
+	# reqeusts 라이브러리를 통해 크롤링할 페이지 주소의 쿼리문에
+	# 변수와 연산자를 통해 사용자 정의 HTML을 요청
+    html = requests.get("https://www.innogov.go.kr/" + url)
+	
+	# BeautifulSoup의 인자로 크롤링할 사용자 정의 HTML 데이터와 파싱 방법을 전달		 	
+    bs_object = bs4.BeautifulSoup(html.text, "html.parser")
+	
+	# BeautifulSoup 객체의 함수 find 를 이용해 게시글 본문 데이터 추출
+    print(bs_object.find("div", {"class": "dbData"}).text)
+	# 추출한 데이터를 게시글 본문 내용을 담는 리스트에 추가
+    detail_list.append(bs_object.find("div", {"class": "dbData"}).text)
+
+def page(index):
+	# reqeusts객체의 get 메서드의 인자에 변수와 연산자를 통해 사용자 정의 HTML을 요청
+    html = requests.get("https://www.innogov.go.kr/ucms/bbs/B0000042/list.do?sort=02&searchCnd=1&searchWrd=&pageIndex=" + str(index) + "&menuNo=300125")
+    
+	# BeautifulSoup의 인자로 크롤링할 사용자 정의 HTML 데이터와 파싱 방법을 전달		 		
+	bs_object = bs4.BeautifulSoup(html.text, "html.parser")
+
+	# BeautifulSoup 객체의 메서드 findAll을 이용해 모든 td태그의 내용을 변수에 할당
+	title_tags = bs_object.findAll('td', {"class": "tit"})
+    if len(title_tags): # 데이터의 인덱스가 0이 아니라면 실행
+        for title in title_tags:
+            print(title.text) # td 각 요소를 순회하면서 text 속성값을 출력
+            try:
+				# 디테일 함수를 호출하여 게시판 본문을 콘솔에 출력하고, detail_list 에 추가
+                detail(title.find('a')["href"])
+                title_list.append(title.text) # title_list애 게시글 추가
+            except:
+				# 오류가 발생한다면 보고하고 실행흐름 유지
+                print("오류 : ", title.text)
+        return False 
+    else:
+        return True # 데이터의 인덱스가 0이라면 True 값을 반환하고 함수 종료
+
+
+def innogov_crw():
+    page_num = 1
+    while True:
+		# page 함수가 호출될 때 BeautifulSoup 객체의 메서드가 읽어올 데이터가 없다면!
+		# if 문의 조건을 충족하여 break 를 통해 while문 종료, 더불어 함수 실행 흐름 종료
+        if page(page_num):
+            break
+		# BeautifulSoup 객체의 메서드가 읽어올 데이터가 남아 있다면 다음 페이지 계속 탐색
+        page_num += 1
+
+# 게시글이 존재하지 않을 때까지 크롤링을 수행하는 함수를 호출
+innogov_crw()
+
+# page(1)
+
+# 딕셔너리 타입의 변수를 선언하고, key와 value로 데이터를 정렬
+data = {
+    "제목": title_list,
+    "내용": detail_list
+}
+
+# pandas 라이브러리를 통해 추출한 데이터를 행과 열로 이루어진 DataFrame 자료구조로 변환
+# 엑셀의 확장자로 수집 및 가공한 데이터 출력
+df = pandas.DataFrame(data)
+df.to_excel("innogov.xlsx")
 
 
 ```
