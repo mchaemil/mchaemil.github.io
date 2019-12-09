@@ -56,7 +56,7 @@ graph TB;
     B[reqeusts 라이브러리를 통해서 크롤링할 HTML 페이지 요청]
 	C[BeautifulSoup의 인자로 크롤링할 HTML 데이터와 파싱 방법을 전달한다.]    
     D[BeautifulSoup 객체의 findAll과 find 함수를 사용하여 원하는 태그를 필터링하고]
-	E[데이터를 추출합니다.]
+	E[데이터를 추출]
     A--yes-->B;
     B--yes-->C;
     C--yes-->D;	
@@ -99,9 +99,49 @@ for tag in h1_tag:
 ### Crawling - 네이버 날씨 
 
 
+```mermaid
+graph TB;
+    A[Crawling 할 때 필요한 라이브러리 import]
+    B[reqeusts 라이브러리를 통해서 크롤링할 페이지 주소의 쿼리문에 변수와 연산자를 통해 사용자 정의 HTML을 요청]
+	C[BeautifulSoup의 인자로 크롤링할 사용자 정의 HTML 데이터와 파싱 방법을 전달]    
+    D[BeautifulSoup 객체의 findAll과 find 함수를 사용하여 지역, 온도, 대기 등에 관한 태그를 필터링하고]
+	E[데이터를 추출]
+    A--yes-->B;
+    B--yes-->C;
+    C--yes-->D;	
+    D--yes-->E;
+	
+```
+
 ```python
+import requests
+import bs4
 
+def crwal_data():
+    user_addr = input('날씨를 알아보고 싶은 지역을 입력하세요')
+    html = requests.get('https://search.naver.com/search.naver?query='+ user_addr +'날씨')
 
+    if html.status_code == 200:
+        bs_object = bs4.BeautifulSoup(html.text, 'html.parser')
+        address = bs_object.find('span', {'class': 'btn_select'})
+        temp = bs_object.find('span', {'class': 'todaytemp'})
+        print('온도: ', user_addr, temp.text)
+
+        indicator_tag = bs_object.find('dl', {'class': 'indicator'})
+        dd_tags = indicator_tag.findAll('span', {'class': 'num'})
+        text_dd = ['미세먼지', '초미세먼지', '오존지수']
+        for text, tag in zip(text_dd, dd_tags):
+            print(text, tag.text)
+    else:
+        print('오류입니다..')
+
+crwal_data()
+
+# 날씨를 알아보고 싶은 지역을 입력하세요 | 금천구
+# 온도:  서울특별시 금천구 가산동 8
+# 미세먼지 59㎍/㎥
+# 초미세먼지 43㎍/㎥
+# 오존지수 0.008ppm
 ```
 
 
