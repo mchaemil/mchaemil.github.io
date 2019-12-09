@@ -6,7 +6,8 @@ tags: python
 ---
 
 ## **Today What I Learend**  
-파이썬이라는 프로그래밍 언어를 가지고 크롤링을 위한 세팅부터 시작해서 간단한 세팅, 실제 사이트에서 다양한 데이터를 수집하는 과정을 진행했다.
+
+크롤링을 위한 세팅부터 시작해서 파이썬이라는 프로그래밍 언어로 실제 사이트에서 제공하는 날씨, 웹툰, 게시글 등 다양한 데이터를 수집하는 과정을 학습했다.
 
 말로만 그리고 커뮤니티 게시판으로만 전해들었던 크롤링을 실제로 직접해보니 놀랍다. 새삼 잊고 지냈던 프로그래밍 언어의 위력을 다시금 느낄 수 있었다. 
 
@@ -45,20 +46,22 @@ print(request_status.text) # naver의 html
 
 ```
 
-### 본격적인 Crawling 시작에 앞서 간단한 맛보기,  Crawling이 진행되는 과정
+### 본격적인 Crawling 시작에 앞서 간단한 맛보기
 
+#### Crawling이 진행되는 과정
 
 ```mermaid
 graph TB;
     A[Crawling 할 때 필요한 라이브러리 import]
     B[reqeusts 라이브러리를 통해서 크롤링할 HTML 페이지 요청]
-	C[BeautifulSoup()의 인자로 크롤링할 HTML 데이터와 파싱 방법을 전달한다.]    
-    D[BeautifulSoup 객체의 findAll()과 find() 함수를 사용하여 원하는 태그를 필터링하고]
+	C[BeautifulSoup의 인자로 크롤링할 HTML 데이터와 파싱 방법을 전달한다.]    
+    D[BeautifulSoup 객체의 findAll과 find 함수를 사용하여 원하는 태그를 필터링하고]
 	E[데이터를 추출합니다.]
     A--yes-->B;
     B--yes-->C;
     C--yes-->D;	
     D--yes-->E;
+	
 ```
 
 
@@ -89,6 +92,7 @@ for tag in h1_tag:
 
 # 1.웹 크롤링을 위한 실습 태그입니다.
 # 2.임의로 만든 실습 태그입니다. 중복 사용된 태그는 다른 메소드를 찾아야 합니다.
+
 ```
 
 
