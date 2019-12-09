@@ -113,7 +113,7 @@ graph TB;
 	
 ```
 
-```python  
+```python
 # Crawling 을 위해 필요한 라이브러리 import
 import requests
 import bs4
@@ -144,7 +144,7 @@ def crwal_data():
 			print(text, tag.text)
     else:
         print('오류입니다..')
-
+		
 crwal_data()
 
 # 날씨를 알아보고 싶은 지역을 입력하세요 | 금천구
