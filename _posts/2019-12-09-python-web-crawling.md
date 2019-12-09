@@ -101,7 +101,7 @@ for tag in h1_tag:
 
 ```mermaid
 graph TB;
-    A[Crawling 할 때 필요한 라이브러리 import]
+    A[Crawling 을 위해 필요한 라이브러리 import]
     B[reqeusts 라이브러리를 통해서 크롤링할 페이지 주소의 쿼리문에 변수와 연산자를 통해 사용자 정의 HTML을 요청]
 	C[BeautifulSoup의 인자로 크롤링할 사용자 정의 HTML 데이터와 파싱 방법을 전달]    
     D[BeautifulSoup 객체의 findAll과 find 함수를 사용하여 지역, 온도, 대기 등에 관한 태그를 필터링하고]
@@ -113,25 +113,35 @@ graph TB;
 	
 ```
 
-```python
+```python  
+# Crawling 을 위해 필요한 라이브러리 import
 import requests
 import bs4
 
 def crwal_data():
+	# input 을 통해 사용자에게 지역이름 요청
     user_addr = input('날씨를 알아보고 싶은 지역을 입력하세요')
+	
+	# reqeusts 라이브러리를 통해 크롤링할 페이지 주소의 쿼리문에 변수와 연산자를 통해 사용자 정의 HTML을 요청
     html = requests.get('https://search.naver.com/search.naver?query='+ user_addr +'날씨')
-
+	
+	# HTTP 요청이 성공적으로 응답했을 때
     if html.status_code == 200:
+		# BeautifulSoup의 인자로 크롤링할 사용자 정의 HTML 데이터와 파싱 방법을 전달
         bs_object = bs4.BeautifulSoup(html.text, 'html.parser')
-        address = bs_object.find('span', {'class': 'btn_select'})
+		
+        # BeautifulSoup 객체의 함수 find 를 이용해 지역 데이터 추출 
+		address = bs_object.find('span', {'class': 'btn_select'})
         temp = bs_object.find('span', {'class': 'todaytemp'})
         print('온도: ', user_addr, temp.text)
-
-        indicator_tag = bs_object.find('dl', {'class': 'indicator'})
+		
+		# BeautifulSoup 객체의 함수 find 를 이용해 대기정보 데이터 추출 
+		indicator_tag = bs_object.find('dl', {'class': 'indicator'})
         dd_tags = indicator_tag.findAll('span', {'class': 'num'})
         text_dd = ['미세먼지', '초미세먼지', '오존지수']
         for text, tag in zip(text_dd, dd_tags):
-            print(text, tag.text)
+            # zip 함수를 통해서 두 개의 리스트를 병렬로 표현
+			print(text, tag.text)
     else:
         print('오류입니다..')
 
