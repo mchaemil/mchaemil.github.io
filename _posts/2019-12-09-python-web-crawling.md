@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Python/Web Crawling - Crawling을 위한 기본 세팅, 네이버 날씨, 웹툰, 정부부처 사이트 Crawling - 부제: 이게 프로그래밍의 힘인가?
+title: Python/Web Crawling - Crawling을 위한 기본 세팅, 네이버 날씨, 웹툰, 정부부처 사이트 Crawling | 부제 - 이게 프로그래밍의 힘인가?
 tags: python
 
 ---
