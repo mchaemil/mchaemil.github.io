@@ -132,10 +132,10 @@ request를 통해 사용자 요청이 들어왔을 때 return 할 HttpResponse�
 from django.contrib import admin
 from django.urls import path, include
 
-urlpatterns = \[
+urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello_world/', include('hello.urls')),
-\]
+]
 
 ```
 
@@ -145,10 +145,10 @@ urlpatterns = \[
 
 ```python
 
-urlpatterns = \[
+urlpatterns = [
     path('', views.hello_world, name="hello_world"),
     path('hello_haemil', views.hello_haemil, name="hello_haemil"),
-\]
+]
 
 ```
 
