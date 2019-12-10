@@ -112,7 +112,7 @@ hello
 
 #### hello/views.py
 
-```Django
+```python
 
 from django.http import HttpResponse
 
@@ -127,7 +127,7 @@ def hello_haemil(request):
 #### config/urls.py
 request를 통해 사용자 요청이 들어왔을 때 return 할 HttpResponse에 데이터를 넘겨준다.
 
-```Django
+```python
 
 from django.contrib import admin
 from django.urls import path, include
@@ -143,7 +143,7 @@ urlpatterns = \[
 
 계층이 깊어질 수도 있지만 hello_world의 / 이후로 계속 페이지를 표현할 수 있다. url 주소에 보여주고 싶은 데이터를 담은 함수를 맵핑할 수 있다. 
 
-```Django
+```python
 
 urlpatterns = \[
     path('', views.hello_world, name="hello_world"),
@@ -159,7 +159,7 @@ urlpatterns = \[
 
 https://docs.djangoproject.com/en/3.0/topics/http/urls/
 
-```Django
+```python
 
 from django.urls import path
 
