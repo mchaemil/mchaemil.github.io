@@ -119,9 +119,9 @@ from django.http import HttpResponse
 # Create your views here.
 def hello_world(request):
     return HttpResponse('Hello World')
-
 def hello_haemil(request):
     return HttpResponse('Hello haemil~!')
+	
 ```
 
 #### config/urls.py
@@ -129,14 +129,14 @@ request를 통해 사용자 요청이 들어왔을 때 return 할 HttpResponse�
 
 ```Django
 
-from django.http import HttpResponse
+from django.contrib import admin
+from django.urls import path, include
 
-# Create your views here.
-def hello_world(request):
-	return HttpResponse('Hello World')
+urlpatterns = \[
+    path('admin/', admin.site.urls),
+    path('hello_world/', include('hello.urls')),
+\]
 
-def hello_haemil(request):
-    return HttpResponse('Hello haemil~!')
 ```
 
 #### hello/urls.py
@@ -145,10 +145,10 @@ def hello_haemil(request):
 
 ```Django
 
-urlpatterns = [
+urlpatterns = \[
     path('', views.hello_world, name="hello_world"),
     path('hello_haemil', views.hello_haemil, name="hello_haemil"),
-]
+\]
 
 ```
 
@@ -160,6 +160,7 @@ urlpatterns = [
 https://docs.djangoproject.com/en/3.0/topics/http/urls/
 
 ```Django
+
 from django.urls import path
 
 from . import views
