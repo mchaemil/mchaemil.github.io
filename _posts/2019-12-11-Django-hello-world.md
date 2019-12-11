@@ -34,7 +34,6 @@ tags: Django
 - 다양한 용도
 
 
-
 ### MVC vs MTV 
 
 프로그램의 복잡도가 높아지면 로직이건 디비건 섞여서 있어서 스파게티처럼 엉키게 되는데, 이를 스파게티 코드라고도 불린다. 스파게티 코드는 누가 쓰는지 모를정도로 뒤엉켜 있는 코드이므로 함부로 못 건드리는 코드가 되어 유지보수 측면에서 문제를 발생시킨다. 
@@ -71,6 +70,7 @@ tags: Django
 ### Hello World 실습
 
 #### 프로젝트 구조 살펴보기
+config 에는 프로젝트를 위한 설정 파일과 웹 서비스 실행을 위한 파일이 들어있다. 기본적인 문서구조가 잘못되면 에러를 만나게 됨..!! 
 
 ```
 
@@ -85,7 +85,9 @@ tags: Django
 └── manage.py
 ```
 
-#### manage.py
+#### manage.py 의 명령어
+manage.py 의 명령어를 통해서 프로젝트를 관리할 수 있다.
+
 
 | 명령어 | 설명 | 
 |---|:---:|---:|
@@ -96,10 +98,11 @@ tags: Django
 | `createsuperuser` | 관리자 계정을 생성 |  
 
 
-#### Hello World 앱 구조 살펴보기
+#### Hello World 앱 디렉토리 구조 살펴보기
+Django 프레임워크를 사용해서 hello_world를 띄우기 위한 준비
+hello 폴더에 urls.py 파일을 생성하여, URL Dispatcher가 hello_world/ 이후의 경로에 대해서 분석하도록 설정 
 
 ```
-
 hello
 ├── admin.py
 ├── models.py
@@ -111,6 +114,8 @@ hello
 ### Hello World 실습 코드
 
 #### hello/views.py
+
+URL Dispatcher가 URL을 분석하여 어떠한 함수를 호출할지 결정하고, return 할 HttpResponse의 인자에 데이터를 넘겨준다.
 
 ```python
 
@@ -125,7 +130,9 @@ def hello_haemil(request):
 ```
 
 #### config/urls.py
-request를 통해 사용자 요청이 들어왔을 때 return 할 HttpResponse에 데이터를 넘겨준다.
+request를 통해 사용자 요청이 들어왔을 때 URL Dispatcher가 URL을 분석하여 어떠한 함수를 호출할지 결정하고, 특정 URL 경로에 대한 처리로직을 설정한다. 
+
+
 
 ```python
 
@@ -141,7 +148,9 @@ urlpatterns = [
 
 #### hello/urls.py
 
-계층이 깊어질 수도 있지만 hello_world의 / 이후로 계속 페이지를 표현할 수 있다. url 주소에 보여주고 싶은 데이터를 담은 함수를 맵핑할 수 있다. 
+계층이 깊어질 수도 있지만 hello_world의 / 이후로 계속 페이지를 표현할 수 있다. url 주소에 보여주고 싶은 데이터를 담은 함수를 맵핑하여 url 주소로 넘어오는 경로에 대해서 처리하는 화면을 제작할 수 있다. 우선은 hello_world까지만..! 
+
+
 
 ```python
 
@@ -152,6 +161,9 @@ urlpatterns = [
 
 ```
 
+#### 결과 화면
+
+![hello-world](https://user-images.githubusercontent.com/40027211/70628194-0f2e6a80-1c6b-11ea-8ca0-4e04c857ac62.PNG)
 
 
 
