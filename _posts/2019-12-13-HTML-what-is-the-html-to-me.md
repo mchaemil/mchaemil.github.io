@@ -1,7 +1,7 @@
 ---
 layout: article
 title: HTML | 나에게 HTML이란 무엇인가?, HTML은 지금 배우는 지식과 어떻게 연결되는가?
-tags: HTML, python
+tags: HTML
 
 ---
 
