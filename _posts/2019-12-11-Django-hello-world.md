@@ -93,7 +93,7 @@ manage.py 의 명령어를 통해서 프로젝트를 관리할 수 있다.
 |---|:---:|---:|
 | `startapp` | 애플리케이션을 새로 만듦 |
 | `makemigrations` | 앱의 모델 변경 사항을 정리 |  
-| `migrate` | 디비에 모델의 변경사항을 적용 |  
+| `migrate` | 디비에 모델의 변경사항을 적용, 이후에 admin 계정 생성가능 |  
 | `runserver` | 테스트 서버를 실행 | 
 | `createsuperuser` | 관리자 계정을 생성 |  
 
@@ -132,7 +132,7 @@ def hello_haemil(request):
 #### config/urls.py
 request를 통해 사용자 요청이 들어왔을 때 URL Dispatcher가 URL을 분석하여 어떠한 함수를 호출할지 결정하고, 특정 URL 경로에 대한 처리로직을 설정한다. 
 
-
+hello_world 와 같은 URL 패턴이 전달되면 URL 패턴처리에 대한 관리를 hello/urls.py 에게 위임한다.
 
 ```python
 
