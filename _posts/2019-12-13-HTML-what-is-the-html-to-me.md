@@ -137,15 +137,13 @@ advancedwebranking 이라는 사이트에서 상위 20개의 구글 검색결과
 
 ```python
 
-{% latest_question_list %}
+latest_question_list 
   <ul>
-    {% for question in latest_question_list %}
-      <li><a href="/polls/{{ question.id }}/">{{ question.question.text }}</a></li>  
-    {% endfor %}
+    for question in latest_question_list 
+      <li><a href="/polls/ question.id /">question.question.text </a></li>  
+     endfor 
   </ul>
-{% else %}
-  <p>No polls are available</p>
-{% endif %}
+
 
 
 ```
