@@ -76,7 +76,8 @@ HTML태그를 작성하며 문법오류가 발생하고, HTML태그 속성이 �
 
 ![html2_상위 20개의 구글 결과에서 수집한 710만개의 인덱스 페이지 검색결과](https://user-images.githubusercontent.com/40027211/70736659-239a6200-1d54-11ea-9c21-1b5338b66754.PNG)
 
-** 여기 있는 28개의 태그만 알고 있다면, 온전히 HTML을 이해했다고 봐도 무방하지 않을까? 나는 그렇게 생각한다. - [생홯코딩 WEB1 수업에서 참고](https://www.youtube.com/watch?v=IJR-pSLGuZM&list=PLuHgQVnccGMDZP7FJ_ZsUrdCGH68ppvPb&index=8)** 
+
+** 여기 있는 28개의 태그만 알고 있다면, 온전히 HTML을 이해했다고 봐도 무방하지 않을까? 나는 그렇게 생각한다. ** - [생활코딩 WEB1 수업에서 참고](https://www.youtube.com/watch?v=IJR-pSLGuZM&list=PLuHgQVnccGMDZP7FJ_ZsUrdCGH68ppvPb&index=8)
 
 ### 지금 살펴볼 딱 4가지의 태그, 더 중요한 것을 구분할 수 있게 해주는 태그
 
@@ -85,9 +86,9 @@ HTML태그를 작성하며 문법오류가 발생하고, HTML태그 속성이 �
 <div>의미가 없는 태그</div>
 <h4>머리글을 나타내는 요소</h4>
 <ul>
-  <li>목록</li>
-  <li>목록</li>
-  <li>목록</li>
+  <li>순서가 없는 자식 목록</li>
+  <li>순서가 없는 자식 목록</li>
+  <li>순서가 없는 자식 목록</li>
 </ul>
 
 
@@ -130,6 +131,23 @@ HTML태그를 작성하며 문법오류가 발생하고, HTML태그 속성이 �
 4. 예상대로 `li`태그내 자식요소에 이미지와 제목, 웹툰 URL 등의 정보를 담고 있음
 
 5. BeautifulSoup 객체의 메서드 find 와 findAll의 인자값으로 어떠한 태그를  넣어야 할지 알게 됨
+
+
+```mermaid
+graph TB;
+    A[1. 의미 없는 div가 요소 전체를 감싸고 있다. 다른 요소와 구별하기 위해서라고 생각]
+    B[2. h4 태그를 사용했으므로 요소내에서 가장 중요한 정보를 담고 있을 것으로 생각, 태그내 텍스트는 화요웹툰(가장 중요한 정보가 맞음)]
+	C[3. 순서 없는 목록 태그를 확인하고, 모든 제목과 이미지가 li태그내에 존재하며, 여기서 내가 원하는 정보를 찾으면 되겠구나 생각]    
+    D[4. 예상대로 li태그내 자식요소에 이미지와 제목, 웹툰 URL 등의 정보를 담고 있음]
+	E[5. BeautifulSoup 객체의 메서드 find 와 findAll의 인자값으로 어떠한 태그를  넣어야 할지 알게 됨]
+    A--yes-->B;
+    B--yes-->C;
+    C--yes-->D;	
+    D--yes-->E;
+	
+```
+
+
 
 
 #### 2. 장고 템플릿에 대한 이해
