@@ -67,16 +67,16 @@ HTML태그를 작성하며 문법오류가 발생하고, HTML태그 속성이 �
 
 
 
-### 그럼 여기서 질문!, 과연 어떠한 태그를 알아야 하는가? 통계에 기반한 학습!
+### 그럼 여기서 질문!, 과연 어떠한 태그를 알아야 하는가? 똑똑하게 태그를 공부하기 위해서 통계에 기반한 학습을 하자!
 
-advancedwebranking 이라는 사이트에서 상위 20개의 구글 검색결과에서 수집한 710만개의 인덱스 페이지에서 기반해 선정한 28개의 태그가 있다.
+[advancedwebranking](https://www.advancedwebranking.com/html/) 이라는 사이트에서 상위 20개의 구글 검색결과에서 수집한 710만개의 인덱스 페이지에서 기반해 선정한 28개의 태그가 있다.
 
 [페이지 링크](https://www.advancedwebranking.com/html/)
 
 
 ![html2_상위 20개의 구글 결과에서 수집한 710만개의 인덱스 페이지 검색결과](https://user-images.githubusercontent.com/40027211/70736659-239a6200-1d54-11ea-9c21-1b5338b66754.PNG)
 
-
+** 여기 있는 28개의 태그만 알고 있다면, 온전히 HTML을 이해했다고 봐도 무방하지 않을까? 나는 그렇게 생각한다. - [생홯코딩 WEB1 수업에서 참고](https://www.youtube.com/watch?v=IJR-pSLGuZM&list=PLuHgQVnccGMDZP7FJ_ZsUrdCGH68ppvPb&index=8)** 
 
 ### 지금 살펴볼 딱 4가지의 태그, 더 중요한 것을 구분할 수 있게 해주는 태그
 
@@ -92,6 +92,8 @@ advancedwebranking 이라는 사이트에서 상위 20개의 구글 검색결과
 
 
 ```
+
+#### :arrow_up: 위의 HTML 태그는 웹페이지에서 :arrow_down: 아래처럼 표현된다.
 
 ---
 
