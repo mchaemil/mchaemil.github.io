@@ -10,12 +10,14 @@ tags: Django
 장고를 사용해 간단한 설문조사 애플리케이션을 만들었다. 아직은 부족한 부분이 많지만 이러한 작은 단위의 애플리케이션이 모여서 큰 프로그램으로 발전한다고 생각하니 작은 단위의 학습 및 코드도 잘하고 싶은 욕심이 생긴다. 
 오늘 만들어보는 애플리케이션을 숙련하며 이해도를 높이자!
 
+[장고 공식 도큐먼트 - 01을 참고](https://docs.djangoproject.com/ko/3.0/intro/tutorial01/)  
+[장고 공식 도큐먼트 - 02을 참고](https://docs.djangoproject.com/ko/3.0/intro/tutorial02/)
 
 
 ---
 **Today I Learend**
 - 프로젝트 진행 순서, MVT 코딩 순서
-- 파일 구조, 에러를 피하기 위해 중요해!
+- 파일 구조 설정, 에러를 피하기 위해 중요해!
 - 스파게티처럼 엉킨 코드가 아닌 MVT 패턴!
 - rest api 에 대한 간단한 이해, 써보긴 써봤지만 이게 뭔지 모르겠어! ㅠㅠ..
 - 
@@ -25,15 +27,15 @@ tags: Django
 
 ### 프로젝트 진행 순서, MVT 코딩 순서
 
-모델, 뷰, 템플릿 중에서 코딩우선 순위는 프로그매머가 편한 방식을 따라야 한다. 다만 화면과 로직은 연결되고, 데이터베이스 테이블 설계는 독립적이므로 Model(모델)을 먼저 코딩하고, 그 다음 서로 연결되어 있는 뷰와 템플릿을 코딩하자
+모델, 뷰, 템플릿 중에서 코딩우선 순위는 스스로가 편한 방식을 따른다. 다만 화면과 로직은 연결되고, 데이터베이스 테이블 설계는 독립적이므로 Model(모델)을 먼저 코딩하고, 그 다음 서로 연결되어 있는 뷰와 템플릿 중에서는 뷰를 먼저 코딩하는 것이 아직까지는 개인적으로 더 나은 방법인 것 같아서 뷰를 먼저 코딩하겠다!
 
 ```mermaid
 graph TB;
     A[프로젝트 구조 만들기]
     B[Model 클래스를 작성하고 데이터베이스에 반영]
 	C[클라이언트의 요청을 분석하는 URLconf를 코딩, URL과 View를 매핑하는 작업]    
-    D[템플릿 문법을 통해 사용자에게 보여질 화면 코딩]
-	E[애플리케이션을 컨트롤하는 View 로직을 코딩]
+	D[애플리케이션을 컨트롤하는 View 로직을 코딩]
+    E[템플릿 문법을 통해 사용자에게 보여질 화면 코딩]	
     A--yes-->B;
     B--yes-->C;
     C--yes-->D;	
@@ -42,7 +44,7 @@ graph TB;
 ```
 
 
-### 파일 구조, 에러를 피하기 위해 중요해!
+### 1. 파일 구조 설정, 에러를 피하기 위해 중요해!
 
 파일구조는 에러를 피하기 위해서 중요한 것 같다. 파일 구조의 깊이가 깊어지면(폴더 안의 폴더) 예상하지 못한 오류를 일으킬 수 있다. 파일 구조는 프로젝트의 기획 및 뼈대를 만들면서 이해할 수 있다!
 
@@ -53,7 +55,7 @@ graph TB;
 │   ├── settings.py
 │   ├── urls.py
 │   ├── wsgi.py
-├── votes
+├── polls
 ├── db.sqlite3
 └── manage.py
 ```
@@ -76,14 +78,89 @@ graph TB;
 	
 ```
 
-** 나의 코드에서 오류가 발생했는지, 장고에서 오류가 발생했는지는 프로젝트가 한참 지난 후에는 찾기 어려우므로 프로젝트를 만들기 전에는 항상 이와 같은 과정을 거치자.**
+**나의 코드에서 오류가 발생했는지, 장고에서 오류가 발생했는지는 프로젝트가 한참 지난 후에는 찾기 어려우므로 애플리케이션을 생성한 이후에는 항상 서버를 실행하는 과정을 거치자.**
 
 
 
 
 
 
-### 프
+### 2. 스파게티처럼 엉킨 코드가 아닌 MVT 패턴!
+
+### 3. MVT 패턴을 위한 첫번째 Model 코딩!
+
+
+#### 2-1. Model 코딩  
+애플리케이션 생성을 통해 만든 votes의 디렉토리의 `models.py` 파일에 아래와 같은 내용을 코딩한다.   
+[데이터베이스의 각 필드는 Field 클래스의 인스턴스로서 표현된다.](https://docs.djangoproject.com/ko/3.0/intro/tutorial02/#creating-models) CharField 는 문자(character) 필드를 표현하고, DateTimeField 는 날짜와 시간(datetime) 필드를 표현한다. 이것은 각 필드가 어떤 자료형을 가질 수 있는지를 Django 에게 말해준다.
+
+
+```python
+
+from django.db import models
+
+# Create your models here.
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=100)
+    pub_date = models.DateTimeField('date published')
+
+    def __str__(self):
+        return self.question_text
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=100)
+    votes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.choice_text
+
+```
+
+**Django 는 N:1(many-to-one), N:N(many-to-many), 1:1(one-to-one) 과 같은 모든 일반 데이터베이스의 관계들를 지원**
+
+
+#### 2-2. Model Activate!!(활성화)
+
+`models.py`에서 작성한 코드는 Django에게는 상당한 정보를 전달하며, Django는 이 정보를 가지고 다음과 같은 일을 수행한다.
+
+- 애플리케이션을 위한 스키마 생성, `CREATE TABLE`
+- `Question`과 `Choice`객체에 접근하기 위한 Python 데이터베이스 접근 API 생성
+
+그렇지만 위와 같은 작업을 수행하기 위해서는 현재 프로젝트에게 polls 앱이 설치되어 있다는 것을 알려야 한다. 이를 위해 앱의 구성 클래스에 대한 참조를 INSTALLED_APPS 설정에 추가해야 한다.
+
+`mysite/settings.py` 파일 내용을 수정
+
+```python
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'polls.apps.PollsConfig', # <= 앱의 구성 클래스에 대한 참조를 INSTALLED_APPS에 설정
+]
+
+```
+
+
+
+```python
+
+
+```
+
+
+```python
+
+
+```
+
+
+
 
 
 ```
