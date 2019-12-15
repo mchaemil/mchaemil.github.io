@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Django/Bookmark | 장고로 만드는 작은 애플리케이션 두번째 
+title: Django/Bookmark | 장고로 만드는 작은 애플리케이션 두 번째 
 tags: Django
 
 ---

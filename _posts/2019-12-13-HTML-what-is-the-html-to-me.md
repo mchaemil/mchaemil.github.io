@@ -77,7 +77,7 @@ HTML태그를 작성하며 문법오류가 발생하고, HTML태그 속성이 �
 ![html2_상위 20개의 구글 결과에서 수집한 710만개의 인덱스 페이지 검색결과](https://user-images.githubusercontent.com/40027211/70736659-239a6200-1d54-11ea-9c21-1b5338b66754.PNG)
 
 
-** 여기 있는 28개의 태그만 알고 있다면, 온전히 HTML을 이해했다고 봐도 무방하지 않을까? 나는 그렇게 생각한다. ** - [생활코딩 WEB1 수업에서 참고](https://www.youtube.com/watch?v=IJR-pSLGuZM&list=PLuHgQVnccGMDZP7FJ_ZsUrdCGH68ppvPb&index=8)
+**여기 있는 28개의 태그만 알고 있다면, 온전히 HTML을 이해했다고 봐도 무방하지 않을까? 나는 그렇게 생각한다** - [생활코딩 WEB1 수업에서 참고](https://www.youtube.com/watch?v=IJR-pSLGuZM&list=PLuHgQVnccGMDZP7FJ_ZsUrdCGH68ppvPb&index=8)
 
 ### 지금 살펴볼 딱 4가지의 태그, 더 중요한 것을 구분할 수 있게 해주는 태그
 

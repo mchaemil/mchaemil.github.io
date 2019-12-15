@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Django/Vote list | 장고로 만드는 작은 애플리케이션
+title: Django/Vote list | 장고로 만드는 작은 애플리케이션 첫 번째
 tags: Django
 
 ---
@@ -87,7 +87,7 @@ graph TB;
 
 ### 2. 스파게티처럼 엉킨 코드가 아닌 MVT 패턴!
 
-### 3. MVT 패턴을 위한 첫번째 Model 코딩!
+### 3. MVT 패턴을 위한 첫 번째 Model 코딩!
 
 
 #### 2-1. Model 코딩  
@@ -146,22 +146,145 @@ INSTALLED_APPS = [
 
 ```
 
+#### 2-3. Model Apply!!(적용)
 
+터미널에서 `python manage.py makemigrations polls` 명령을 실행하면 아래와 같이 Question, Choice 클래스가 테이블 정의를 변경한 상태가 됩니다. 
+
+```
+Migrations for 'polls':
+  polls/migrations/0001_initial.py:
+    - Create model Choice
+    - Create model Question
+    - Add field question to choice
+
+```
+
+그리고 터미널에 `python manage.py migrate` 명령으로 데이터베이스에 클래스로 정의한 모델을 생성합니다.
+
+
+#### migrate 명령
+
+`migrate` 명령은 아직 적용되지 않은 migrations을 모두 수집해 실행하며(Django는 django_migrations 테이블을 두어 마이그레이션 적용 여부를 추적한다), 이 과정을 통해 `models.py`에서 작성한 모델의 변경 사항과 데이터베이스의 스키마의 동기화가 이루어진다.
+
+**모델을 만드는 세 가지 지침!!**
+1. (models.py 에서) 모델을 변경.
+1. python manage.py makemigrations을 통해 변경한 모델 사항에 대한 마이그레이션을 만들고
+1. python manage.py migrate 명령을 통해 변경사항을 데이터베이스에 적용.
+
+
+#### 관리자 생성, admin에서 polls App 변경가능하도록 설정
+
+
+**[잠깐 장고의 admin 사이트가 자동화가 되어 있는 이유! - 링크](https://docs.djangoproject.com/ko/3.0/intro/tutorial02/#introducing-the-django-admin)**
+> Django는 Lawrence Journal-World 신문사의 프로그래머가 처음 개발하였고, 이 때문에, "컨텐츠 게시자" 와 "공개" 사이트의 구분이 명확하다. 사이트 관리자는 뉴스 기사, 사건, 스포츠 경기 결과 같은 것들을 시스템에 추가하고, 그렇게 추가된 컨텐츠는 "공개" 사이트에 노출된다. Django는 사이트 관리자가 컨텐츠를 편집할 수 있는 통합적인 인터페이스를 생성하는 문제를 해결한다.
+
+1. 터미널에 `python manage.py createsuperuser` 을 통해 명령을 실행
+1. admin에게 Question object가 admin interface를 가지고 있다는 것을 알려야하는데, 이를 위해 `polls/admin.py` 파일을 열고 register() 메서드의 인자에 Question object를 등록해주어야 한다.
 
 ```python
+
+from django.contrib import admin
+from .models import Question
+
+# admin site에서 관리 인덱스 페이지 보여주기
+admin.site.register(Question) 
 
 
 ```
 
 
+
+
+
+
+### 3. MVT 패턴을 위한 두 번째, View 코딩!
+
+장고는 Elegant URL 방식을 사용하여, 직관적이며 뷰와 1:1 로 매핑하므로 개발이 편하고 이해도 쉽습니다. 
+> URL pattern is the general form of a URL - for example: /newsarchive/year/month/
+
+Django는 URL로부터 뷰를 얻기 위해 'URLconf'라는 것을 사용합니다. 클라이언트에게 요청을 받으면 URLconf는 URL 패턴을 `urls.py`에 정의된 URL 패턴과 매칭되는지 분석한 후 뷰에 연결합니다.
+
+#### 3-1. URL과 뷰를 매핑하는 URLconf 코딩
+
 ```python
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('<int:question_id>/', views.detail, name='detail'),
+    # detail(request, question_id=1), <>를 통해서 int이면 추출하고, 추출한 값을 question_id에 할당한다.
+    path('<int:question_id>/results', views.results, name='results'),
+    path('<int:question_id>/vote', views.vote, name='vote'),
+
+]
 
 
 ```
 
+#### 3-2. View 코딩
+
+**index 페이지, 투표 상세화면 View 코딩**
+
+##### render shortcut(단축함수)
+
+**render()** 는 첫번째 인자로 request 객체, 두 번째 인자로 템플릿 코드를 로딩한 후에 context 변수를 적용하여, 그 결과를 HTTPResponse 객체에 담아 반환한다.
+
+##### get_object_or_404 shortcut(단축함수)
+
+**get_object_or_404()** 함수는 모델 클래스를 첫 번째 인자로 받고, 두 번째 인자부터 검색 조건으로 몇개의 키워드 인수를 모델 관리자의 get() 함수에 넘깁니다. 만약 객체가 존재하지 않을 경우, Http404 예외가 발생합니다.
+
+```python
+def index(request):
+    latest_question_list = Question.objects.all().order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+
+    return render(request, 'polls/index.html', context)
+
+def detail(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    context = {'question': question}
+    return render(request, 'polls/detail.html', context)
+
+
+```
+
+**vote 페이지, 투표 상세화면 View 코딩**
+
+
+```python
+
+def vote(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    try:
+        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        return render(request, 'polls/detail.html', {
+            'question': question,
+            'error_message': "투표를 진행해주세요..."
+        })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        return HttpResponseRedirect(reverse('polls:results', args=(question_id,)))
+
+
+def results(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    context = {'question': question}
+    return render(request, 'polls/results.html', context)
+		
+		
+```
+
+### 4. Template 코딩
 
 
 
+
+
+### rest api를 쓰는 이유 
 
 ```
 
@@ -172,10 +295,8 @@ INSTALLED_APPS = [
 서버 개발자가 개발한 다음에 가져다가 쓰셈이 안 될경우..! 
 
 
-
 ```
 
-- rest api를 쓰는 이유 
 
 rest api 가 없는 경우에는 postman 같은 툴?
 로그인 했을 떄 헤더에는 어떠한 값, 바디에는 어떠한 값, ㅇ
