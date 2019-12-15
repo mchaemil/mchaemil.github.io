@@ -282,6 +282,32 @@ def results(request, question_id):
 
 
 
+```
+mysite
+├── config
+├── polls
+│   ├── migrations
+│   └── templates
+│        └── polls
+│	          ├── index.html
+│	          ├── detail.html
+│	          └── results.html
+│
+├── manage.py
+└── db.sqlite3
+
+```
+
+```python
+
+\{\% if error_message \%\}
+
+
+
+
+```
+
+
 
 
 ### rest api를 쓰는 이유 
