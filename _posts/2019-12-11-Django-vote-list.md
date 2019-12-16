@@ -298,14 +298,11 @@ mysite
 
 ```
 
-```python
+![index](https://user-images.githubusercontent.com/40027211/70865054-47e87f80-1f9c-11ea-9858-51611196e730.PNG)
 
-\{\% if error_message \%\}
+![detail](https://user-images.githubusercontent.com/40027211/70865057-4ae37000-1f9c-11ea-9a4b-403e59473984.PNG)
 
-
-
-
-```
+![results](https://user-images.githubusercontent.com/40027211/70865058-4e76f700-1f9c-11ea-8508-f8308fa67169.PNG)
 
 
 
