@@ -143,4 +143,27 @@ print('최저 기온은:', min_row[6])
 ```
 
 
+#### 서울의 날씨가 가장 더울 때와 추울 때를 함께 찾기
+
+```python
+temp_range = 0
+range_row = []
+for row in data:
+    if len(row) < 7 or row[4] == '' or row[6] == '':
+        continue
+    hot_temp = float(row[4])
+    ice_temp = float(row[6])
+    sum_temp = hot_temp - (ice_temp)
+    if sum_temp > temp_range:
+        temp_range = sum_temp
+        range_row = row
+
+
+print(range_row, '일교차:', temp_range)
+# ['\t\t108', '서울', '2015-04-18', '15.2', '23.7', '16:14', '5.2', '5:39'] 일교차: 18.5
+file.close()
+
+```
+
+
 
