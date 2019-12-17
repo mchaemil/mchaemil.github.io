@@ -19,12 +19,6 @@ tags: Python
 - virtualenv 로 프로젝트 시작
 
 
-
-
-
-
-
-
 ---
 
 
@@ -135,14 +129,25 @@ tags: Python
 다양한 버젼의 파이썬을 설치하면, 한 운영체제에 여러개를 설치하면 잘 안될 수도 있다. 
 그리고 특정 어플리케이션은 3.6가 필요한데, 이를 지원이 안된다면..! 곤란...!
 
-가상환경은 A, B, C 로 구분하고
+| 가상환경A | 가상환경B | 가상환경C |
+|---|:---:|---:|
+| Python 3.5 | Python 2.7 | Python 3.4 |
+| Django | Numpy, Tensorflow | PyQT5 |
+| Web |  Data 분석 | Gui Application |
+
+
+프로젝트를 위한 가상환경은 A, B, C 로 구분하고
 장고, 넘파이, 파이큐티로 지유아이 앱을 만든다면
 
 프로젝트가 끝나면 폴더만 지운다!
 별개의 가상환경으로 별개의 모듈을 사용함으로서 
+
+엉키고 설키는 일 없이
 깔끔하게 환경을 구성할 수 있다. 
 
+**가상환경을 작업하는 순서**
 
+---
 
 1. `python -m venv python_workspace`
 2. cd python_workspace
@@ -150,6 +155,7 @@ tags: Python
 4. 윈도우는 `activate` | Mac은 `source ./activate`
 5. 가상환경을 빠져나가고 싶을 때는 `deactivate`
 
+---
 
 여기까지 했다면 매우 잘했음!
 개발을 하다가 무언가가 꼬였다면
@@ -172,6 +178,27 @@ tags: Python
 
 `pip list` => 현재 어떤 패키지가 설치되었는지 확인
 
+
+#### Test!
+1. simplejson 설치해보기
+1. 아래 `Test code`를 실행해보기
+1. simplejson 삭제해보기
+
+**Test code**
+```python
+
+# import simplejson as json 이게 아니고...
+import json as simplejson # 여기처럼 작성
+test_dict = {
+    '1': 95,
+    '4': 66,
+    '2': 16,
+    '3': 76,
+}
+
+print(simplejson.dumps(test_dict, sort_keys=True, indent=4 * ' '))
+
+```
 
 ### Pyenv로 파이썬 버전 관리하기
 [PYENV로 파이썬 버전 관리하기](http://jeonghwan-kim.github.io/2016/08/11/pyenv.html)
