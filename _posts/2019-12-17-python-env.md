@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Python/가상환경 | virtualenv
+title: Python/가상환경 | python 프로그래밍을 위한 가상환경 설정하기(feat. virtualenv, VSCode, Python, Django )
 tags: Python
 
 ---
@@ -13,8 +13,10 @@ tags: Python
 ---
 **Today I Learend**
 
+- VSCode 에 python 설치, Windows 설정
+- VSCode 에 python 설치, Mac 설정
 
-- virtualenv
+- virtualenv 로 프로젝트 시작
 
 
 
@@ -26,13 +28,63 @@ tags: Python
 ---
 
 
+### VSCode 에 Python 설치 
+
+1. Python 설치 후 Path 연결 
+1. VSCode 도 가능하면 같은 폴더 구조에서 설치하기  
+1. VSCode 실행 후 Extension에서 Python 설치
+4. 설정(톱니바퀴 모양)에서 Command Palette를 클릭하고, Python: Select Interpreter
+1. task runner 를 설치
+	1. Command Palette 입력창에 Tasks: Configure Task 
+	1. Create tasks.json file from template => Ohters
+	2. 아래의 코드를 복사해서 붙여넣기
+	3. ctrl + shifr + B 단축키를 통해서 파이썬 실행
+	3. Executing task: 실행 파일 이름과 출력 내용이 간단하게 실행됨
+	
 
 
-Pyenv로 파이썬 버전 관리하기
+```
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Project Label",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "${file}" // 내가 실행하는 파일이 실행될 수 있도록
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "options": {
+                "env": {
+                    "PYTHONIOENCODING": "UTF-8" // 한글 출력을 위해서 UTF-8로 설정
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
 
-http://jeonghwan-kim.github.io/2016/08/11/pyenv.html
+```
 
 ### 파이썬 가상환경 설정
+
+
+
+
+
+
+### Pyenv로 파이썬 버전 관리하기
+[PYENV로 파이썬 버전 관리하기](http://jeonghwan-kim.github.io/2016/08/11/pyenv.html)
+
 
 
 
