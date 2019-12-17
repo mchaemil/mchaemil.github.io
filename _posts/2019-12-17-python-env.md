@@ -207,8 +207,49 @@ print(simplejson.dumps(test_dict, sort_keys=True, indent=4 * ' '))
 
 
 ### 장고 가상환경 설정
-pip3 install virtualenv  
+
+
+#### 장고 프로젝트 구축 순서
+1. 가상환경 폴더로 이동 후 `activate`! 
+1. `activate` 실행 후 Root folder로 빠져나오기
+1. `pip install django`
+1. `django-admin startproject <project_name>`
+1. `cd <project_name>` 
+1. `django-admin startapp <app_name>`
+
+```
+Root Folder
+
+<project_name>
+└──<project_name>
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+├──	<app_name>
+├── db.sqlite3
+└── manage.py
+```
+
+#### 가상환경을 만드는 두 번째 방법
+**virtualenv** 사용하기
+`pip install virtualenv` 명령으로 virtualenv가 설치되었다면
+`virtualenv django_pjt1` 과 같은 virtualenv + <프로젝트 이름>으로 가상환경을 구축할 수 있다. 
+
+
+
+`pip3 install virtualenv`
 [파이썬 가상환경 설정시 Errno 13, Permission denied 오류 발생할 때](https://github.com/googlesamples/assistant-sdk-python/issues/236)
+
+
+**첫 번째 구축 순서와 같음, 명령어만 다름**
+1. `pip install virtualenv` 명령으로 virtualenv 설치 
+1. 설치되었다면 `virtualenv django_pjt1` 과 같은 virtualenv + <프로젝트 이름>으로 가상환경을 구축할 수 있다. 
+1. 가상환경을 구축하고 프로젝트 생성 순서는 위와 같음
+
+**Tip.**  
+맥의 경우는 가상환경으로 진입해 activate를 실행할 때 source를 입력해야 하고, 윈도우는 그냥 activate를 입력하면 된다. 
+
 
 
 ---
@@ -218,6 +259,7 @@ pip3 install virtualenv
 - python -m pip install google-assistant-sdk[samples] 
 
 ---
+
 
 
 virtualenv &lt;project name&gt;
