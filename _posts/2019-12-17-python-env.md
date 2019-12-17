@@ -52,7 +52,7 @@ tags: Python
         {
             "label": "Project Label",
             "type": "shell",
-            "command": "python",
+            "command": "python", // Mac에서는 python3으로 변경하기!!
             "args": [
                 "${file}" // 내가 실행하는 파일이 실행될 수 있도록
             ],
@@ -92,15 +92,85 @@ tags: Python
 1. task runner 를 설치 - 단축키 설정, console창 정리
 1.  Command Palette에서 configure task 클릭
 
+**더욱 빠르게 단축키로 실행할 수 있음**  
+`commnad + shift + B`
+```
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Project Label",
+            "type": "shell",
+            "command": "python3", // Mac에서는 python3으로 변경하기!!
+            "args": [
+                "${file}" // 내가 실행하는 파일이 실행될 수 있도록
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "options": {
+                "env": {
+                    "PYTHONIOENCODING": "UTF-8" // 한글 출력을 위해서 UTF-8로 설정
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
 
+```
 
 
 
 ### 파이썬 가상환경 설정
+의문을 가지고 해결을 해야 실력이 향상될 수 있다. 
+가상환경을 쓰는 이유
+
+다양한 버젼의 파이썬을 설치하면, 한 운영체제에 여러개를 설치하면 잘 안될 수도 있다. 
+그리고 특정 어플리케이션은 3.6가 필요한데, 이를 지원이 안된다면..! 곤란...!
+
+가상환경은 A, B, C 로 구분하고
+장고, 넘파이, 파이큐티로 지유아이 앱을 만든다면
+
+프로젝트가 끝나면 폴더만 지운다!
+별개의 가상환경으로 별개의 모듈을 사용함으로서 
+깔끔하게 환경을 구성할 수 있다. 
 
 
 
+1. `python -m venv python_workspace`
+2. cd python_workspace
+3. 윈도우는 `Scripts` | Mac은 `bin` 으로 이동
+4. 윈도우는 `activate` | Mac은 `source ./activate`
+5. 가상환경을 빠져나가고 싶을 때는 `deactivate`
 
+
+여기까지 했다면 매우 잘했음!
+개발을 하다가 무언가가 꼬였다면
+코드 파일은 그대로 두고 `include`, 'bin', 'Scripts'만 지우고 다시 설치하면 됨
+
+
+### 파이썬 가상환경에 패키지 설치해보기
+#### 기억해야 할 명령어
+
+`pip search simplejson` => 특정 패키지 검색
+`pip search simple*` => simple이라는 단어가 들어간 패키지 검색, 내가 필요한 게 있는지 구글링, 깃허브 검색을 해서 사용해보기를 추천
+
+
+`pip show simplejson` => 특정 패키지에 대한 내용정보를 요청할 떄!
+
+
+`pip install simplejson` => 패키지 설치
+
+`pip install --upgrade simplejson` => 간단한 명령어로 버전을 업그레이드를 진행할 수 있음
+
+`pip list` => 현재 어떤 패키지가 설치되었는지 확인
 
 
 ### Pyenv로 파이썬 버전 관리하기
