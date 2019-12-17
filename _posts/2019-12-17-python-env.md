@@ -24,23 +24,39 @@ tags: Python
 
 
 ---
+
+
+
+
 Pyenv로 파이썬 버전 관리하기
 
 http://jeonghwan-kim.github.io/2016/08/11/pyenv.html
 
+### 파이썬 가상환경 설정
 
 
-pip3 install virtualenv   
+
+### 장고 가상환경 설정
+pip3 install virtualenv  
+
+---
+**오류 발생시**  
+- python3 -m venv env => (가상환경 파일을 생성?)
+- source ./env/bin/activate   
+- python -m pip install google-assistant-sdk[samples] 
+
+---
+
+
 virtualenv &lt;project name&gt;
 source &lt;project name&gt;/bin/activate => 앞에 이 환경을 쓰고 있다는 문자열이 생긴다. 윈도우 사용자는 source는 빼고 입력
 
-가상환경을 만든 후 그 속에 
-pip3 install django를 설치
+가상환경을 만든 후 그 속에 pip3 install django를 설치
 
 
 django-admin startproject &lt;project name&gt; => config 같은 느낌의 폴더, 프로젝트 디렉토리 네임이랑 프로젝트 이름이랑 같게 하니.. 헷갈...
 
 cd &lt;project name&gt;
 
-django-admin startapp &lt;app name&gt;
+django-admin startapp &lt;app name&gt; # 애플리케이션의 이름
 
