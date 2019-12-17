@@ -29,7 +29,7 @@ tags: Python
 
 
 ### VSCode 에 Python 설치 
-
+#### Windows
 1. Python 설치 후 Path 연결 
 1. VSCode 도 가능하면 같은 폴더 구조에서 설치하기  
 1. VSCode 실행 후 Extension에서 Python 설치
@@ -75,6 +75,27 @@ tags: Python
 
 ```
 
+#### Mac
+
+1. Python 설치 후 
+1. VSCode 를 실행하여, Shell Command: Install 'code'command in PATH 를 연결
+1. VSCode 실행 후 Extension에서 Python 설치
+4. 코드를 실행하고 가상환경을 설정!! 
+	1. 작업 환경으로 이동하여
+	1. python3 -m venv `python_basic` => 폴더이름 설정
+	1. 그리고 bin으로 이동후 
+	1. source ./activate => 이를 통해 가상환경 활성화됨
+	1. `deactivate` 를 실행하면 가상환경 해제
+	1. 
+1. 앞으로는 Terminal을 통해서 가상환경을 실행하고 code 명령어 입력을 통해서 VSCode 를 실행하고 코드를 작성
+4. 설정(톱니바퀴 모양)에서 Command Palette를 클릭하고, Python: Select Interpreter, 가상환경으로 잡아둔 버전을 설정
+1. task runner 를 설치 - 단축키 설정, console창 정리
+1.  Command Palette에서 configure task 클릭
+
+
+
+
+
 ### 파이썬 가상환경 설정
 
 
@@ -90,6 +111,8 @@ tags: Python
 
 ### 장고 가상환경 설정
 pip3 install virtualenv  
+[파이썬 가상환경 설정시 Errno 13, Permission denied 오류 발생할 때](https://github.com/googlesamples/assistant-sdk-python/issues/236)
+
 
 ---
 **오류 발생시**  
