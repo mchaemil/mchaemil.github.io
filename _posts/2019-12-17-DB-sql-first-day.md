@@ -10,7 +10,11 @@ tags: SQL
 
 SQL 문을 통해 데이터를 정제할 수 있는 다양한 연산자를 학습하고
 이를 활용하여 데이터를 정제하는 방법을 연습해보자
+SQL은 주어진 문제를 다시 풀어보면서 익히는 시간을 충분히 가지는 것이 중요하다. 
 
+그리고 이러한 감각은 시간이 쌓여야 무뎌지지 않으므로 꾸준히 연습하고 주어진 문제를 답안을 보지 않고 푸는 연습을 수행해보자
+
+결국, 내가 목표해야 하는 지점은 테이블에서 원하는 데이터를 뽑아낼 수 있는 능력이다. 스스로가 조건에 맞는 처리를 할 수 있어야 한다. 
 
 ---
 **Today I Learend**
@@ -22,6 +26,9 @@ SQL 문을 통해 데이터를 정제할 수 있는 다양한 연산자를 학�
 
 
 ---
+
+-- 컨트롤 스페이스 엔더를 누르면 자동완성 기능을 사용할 수 있다. 
+
 
 
 ### 데이터란 무엇인가?
@@ -205,69 +212,78 @@ WHERE last_name = 'Simmel'
 ;
 ```
 
+#### 대소비교 연산자
+##### 사원 중에서 사번이 20000번 이하인 사람들의 정보를 출력해보자. 
 
 ```sql
-
-
-
-```
-
-
-
-```python
-
-
-
-
-
-
-# 테이블에서 내가 원하는 데이터를 뽑아내느게 능력이다. 스스로 조건에 맞는 처리를 할 수 있어야 한다. 
-
-
--- 사원 중에서 사번이 20000번 이하인 사람들의 정보를 출력해보자. 
 -- >=, <, <=,  둘다 같지 않다.  <>, != 
 SELECT *
 FROM employees
 WHERE emp_no <= 20000
 ;
 
--- 사원 중에서 사번이 20000 이상이고, 20100 이하인 사람들의 
--- 이름과 성별을 출력해보자 
--- AND 연산자는 조건을 추가할 때,
--- 또는 A AND B: A와 B의 조건을 다 만족할 때
+
+
+
+```
+
+#### AND
+AND 연산자는 조건을 추가할 때, A AND B: A와 B의 조건을 다 만족하는 데이터를 찾을 때 사용한다.
+
+##### 사원 중에서 사번이 20000 이상이고, 20100 이하인 사람들의 이름과 성별을 출력해보자 
 -- 마지막에는 데이터를 검증하는 차원에서 추가로 가져와야할 데이터가 필요할 수 있다.
+
+```sql
 
 SELECT emp_no, first_name, gender
 FROM employees 
 WHERE emp_no >= 20000
- 
+AND emp_no < 20100
+; 
+```
 
--- 같은 조건인데 다른 쿼리문, 
--- betwweb a and b
--- a 이상 b 이하인 데이터를 가져오는 방법  
---  
+#### BETWEEN A AND B
+위의 조건과 같은 조건인데 다른 쿼리문!
+A 이상 B 이하인 데이터를 가져오는 요청을 할 때 사용하는 방법 
+
+```sql
+
 SELECT emp_no, first_name, gender
 FROM employees 
 WHERE emp_no BETWEEN 20000 AND 20100
 
--- 사원 테이블에서 14000을 초과하고 15000 보다 작은 
--- 사원의 이름을 가져오시오
+```
+
+사원 테이블에서 emp_no이 14000을 초과하고 15000 보다 작은 
+사원의 이름을 가져오시오
+
+```sql
+
 SELECT emp_no, first_name, last_name
 FROM employees
 WHERE emp_no > 14000 
 AND emp_no < 15000
 ;
 
+```
+
+```sql
 SELECT emp_no, first_name, last_name
 FROM   employees
 WHERE  emp_no BETWEEN 14001 AND 14999
 ;
 
--- 사원 중에 입사한 일자가 '19850101' ~ '19860101'인 
--- 사원들의 정보를 출력해보자 
--- 한 방에 데이터를 뽑으려고 하지 말고 조금씩 업그레이드 해간다. 
--- 일단은 데이터를 보고서 시작을 한다.
--- 날짜를 처리하는 함수를 처리할 때는 DATE_FORMAT(<field 명>), '내가 보고자 하는 날짜 형식')
+```
+
+#### DATE_FORMAT
+
+문제를 해결하는 방법
+한 방에 데이터를 뽑으려고 하지 말고 조금씩 업그레이드 해간다. 
+일단은 데이터를 보고서 시작을 한다.  
+**날짜를 처리하는 함수를 처리할 때는 DATE_FORMAT(<field 명>), '내가 보고자 하는 날짜 형식')**
+
+```sql
+
 -- DATE_FORMAT(<field 명>, '%Y') : 연도를 출력
 -- DATE_FORMAT(<field 명>, '%M') : 월을 출력
 -- DATE_FORMAT(<field 명>, '%D') : 알저를 출력
@@ -275,12 +291,17 @@ WHERE  emp_no BETWEEN 14001 AND 14999
 -- DATE_FORMAT(<field 명>, '%Y-%M-%D') : 2019-12-17 
 -- DATE_FORMAT(<field 명>, '%Y%M%D %H-%i-%p') : 20191217 14-12 pm (24) 대문자는 24
 -- DATE_FORMAT(<field 명>, '%Y%M%D %h-%i-%p') : 20191217 14-12 pm (12) 소문자는 12
--- 컨트롤 스페이스 엔더를 누르면 자동완성 기능을 사용할 수 있다. 
 
  
 SELECT DATE_FORMAT(hire_date, '%Y%M%D')
 FROM   employees
 ;
+
+```
+
+##### Q. 사원 중에 입사한 일자가 '19850101' ~ '19860101'인 사원들의 정보를 출력해보자 
+
+```sql
 
 SELECT *
 FROM   employees
@@ -294,27 +315,39 @@ WHERE  DATE_FORMAT(hire_date, '%Y-%M-%D') BETWEEN '1985-01-01' AND '1986-01-01'
 -- AND    DATE_FORMAT(hire_date, '%Y-%M-%D') <= '1986-01-01'
 ;
 
--- 나온 결과를 정렬해서 확인해보자 
--- 사원 중에 입사한 일자가 '1985-01-01' ~ '1986-01-01' 인 사원들의
--- 정보를 출력해보는...! 것을 해보자. 최근에 입사한 입사자가 맨 위로 올 수 있도록 정렬하자!
--- ORDER BY <필드명> ASC(1 -> 10) or DESC(10 -> 1)
 
+```
+
+#### ORDER BY, 정렬을 위한 키워드
+
+##### ASC, DESC
+
+- 나온 결과를 정렬하고 싶을 때 사용 
+- ORDER BY <필드명> ASC(1 -> 10) or DESC(10 -> 1)
+- ASC는 자동으로 붙으므로 큰 것부터 정렬할 때만 DESC를 붙이면 된다. 
+
+
+##### Q. 최근에 입사한 입사자가 맨 위로 올 수 있도록 정렬하자!
+사원 중에 입사한 일자가 '1985-01-01' ~ '1986-01-01' 인 사원들을 출력해서 정렬해보기
+
+```sql  
 SELECT *
 FROM   employees
 WHERE  DATE_FORMAT(hire_date, '%Y-%M-%D') BETWEEN '1985-01-01' AND '1986-01-01'
 ORDER BY hire_date DESC
 ;
 
--- ASC는 자동으로 붙으므로 큰 것부터 정렬할 때만 DESC를 붙이면 된다. 
 SELECT *
 FROM  employees
 WHERE DATE_FORMAT(hire_date, '%Y%m%d') = '19850101'
 ORDER BY hire_date DESC
 ;
 
+```
 
+##### Q. 입사년도가 1990년인 사원의 정보를 출력해주세요
 
--- 입사년도가 1990년인 사원의 정보를 출력해주세요
+```sql 
 SELECT *
 FROM   employees
 WHERE  DATE_FORMAT(hire_date, '%Y') = '1990' 
@@ -322,10 +355,15 @@ ORDER BY hire_date
 ;
 
 
--- 사원들 중에서 성이 'Genin'이거나 'Facello'인 사원의 정보를 출력해보자
--- or 연산자
--- 조건 or 조건 : 둘 중에 하나만 만족해도 출력하는 데이터
- 
+```
+
+#### OR 연산자
+
+조건 or 조건 : 둘 중에 하나만 만족해도 출력하는 데이터
+
+##### Q. 사원들 중에서 성이 'Genin'이거나 'Facello'인 사원의 정보를 출력해보자
+
+```sql
 SELECT *
 FROM employees 
 WHERE last_name = 'Genin'
@@ -333,65 +371,87 @@ OR last_name = 'Facello'
 ORDER BY last_name
 ;
 
+```
 
--- IN 연산자를 사용해보자. 
--- OR 와 동일한 결과를 나타낸다. 
--- <필드명> IN ('A값', 'B값') 
--- A값 또는  B값을 만족하는 데이터를 가져온다.
--- IN이 성능이 더 좋다. 
+#### IN
+
+- IN은 OR 와 동일한 결과를 나타낸다. 
+- <필드명> IN ('A값', 'B값') 
+- A값 또는  B값을 만족하는 데이터를 가져온다.
+- OR보다 **IN이 성능이 더 좋다.** 
 
 
+##### Q. 사원들 중에서 성이 'Genin'이거나 'Facello'인 사원의 정보를 IN 연산자를 사용해서 출력해보자
+
+```sql
 SELECT *
 FROM employees 
 WHERE last_name IN ('Genin', 'Facello')
 ORDER BY last_name
 ;
 
+```
 
--- Alias 별칭
--- <필드명> as 사용하고 싶은 이름 
--- <필드명> 이름에 공백이 있는 경우 '별 칭' 싱글 쿼테이션으로 묶어 준다.
+#### AS
+- Alias 별칭, AS를 통해서 내가 원하는 이름으로 컬럼명을 바꿀 수 있다. 
+- <필드명> as 사용하고 싶은 이름 
+- <필드명> 이름에 공백이 있는 경우 '별 칭' 싱글 쿼테이션으로 묶어 준다.
 
+
+```sql
 SELECT last_name AS 이름, first_name AS 성
 FROM employees 
 WHERE last_name IN ('Genin', 'Facello')
 ORDER BY last_name
 ;
+```
 
+##### 배운 내용 다 써서 데이터 뽑아와보기
 
+```sql
 SELECT hire_date AS 입사년도
 FROM   employees
 WHERE  DATE_FORMAT(hire_date, '%Y-%M-%D') BETWEEN '1985-01-01' AND '1986-01-01'
 ORDER BY hire_date DESC
 ;
+```
 
 
--- 테이블을 여러개를 조인을 할 때 긴 이름을 가지고 있다면 를 줄여주기 위해서 
--- 테이블 이름을 줄이는 용법
--- table 에 Alias 적용하기
+
+
+#### TABLE AS
+
+테이블을 여러개를 조인할 때 긴 이름을 가지고 있다면 이를 줄여주기 위해서, 그리고 테이블 속 컬럼이 엉키지 않도록 사용하는 기법이다. 
+
+
+```sql
 SELECT emp.hire_date AS 입사년도
 FROM   employees emp
 WHERE  DATE_FORMAT(emp.hire_date, '%Y-%M-%D') BETWEEN '1985-01-01' AND '1986-01-01'
 ORDER BY emp.hire_date DESC
 ;
 
-
 SELECT *
 FROM employees emp
 WHERE first_name = 'Parto' AND DATE_FORMAT(emp.hire_date, '%Y') = 1990
 ;
 
+```
+#### LIKE 연산자
 
--- 사원 중에 읾이 s 로 시작하는 사원의 정보르 ㄹ출력해보자 
--- LIKE 연산자 
--- <필드명> LIKE 's' : s 를 포함하는 데이터
--- <필드명> LIKE 's%' : s로 시작하는 데이터
--- <필드명> LIKE '%s' : s로 끝나는 데이터
+조회하는 데이터에서 사원 이름이 's'로 시작하는 사원의 정보를 출력해야 할 경우
+- <필드명> LIKE 's' :  s를 포함하는 데이터
+- <필드명> LIKE 's%' : s로 시작하는 데이터
+- <필드명> LIKE '%s' : s로 끝나는 데이터
+- <필드명> LIKE '%s%' : s를 중간에 포함나는 데이터
+- <필드명> LIKE '__s' : 3글자인데 2글자를 모르면 _로 채우고 조회한다. 
+- wild card : % / 무언가를 포함하는 데이터를 찾을 때 좋다.!!
+- like 연산자는 위와 같은 조건으로 검색을 진행할 수 있다. 
+- 이러한 방법으로 %연산자를 통해 데이터를 활용할 수 있겠다. 
 
--- <필드명> LIKE '%s%' : s를 중간에 포함나는 데이터
--- <필드명> LIKE '__s' : 3글자인데 2글자를 모르면 _로 채우고 조회한다. 
--- wild card : % / 무언가를 포함하는 데이터를 찾을 때 좋다.!!
+##### Q. Like연산자를 사용해서 데이터 뽑아보기
 
+```sql
 SELECT *
 FROM employees emp
 WHERE emp.first_name LIKE 's%'
@@ -402,39 +462,40 @@ FROM employees emp
 WHERE emp.first_name LIKE 'Staff___'
 ;
 
+```
 
--- 이러한 조건으로 검색을 진행할 수 있다. 
--- 이러한 방법으로 %연산자를 통해 데이터를 활용할 수 있겠다.  
+**활용 예시**
+```
 SELECT *
 FROM   board
 WHERE  id = '%jisun'
 OR     title = 'icecream%'
+```
 
 
+##### Q. 사원 중에 직무가 'Engineer'와 'Senior Engineer'인 사원의 사번을 출력해보기
+- 참고로 employees의 필드에는 직무가 없다..!
+- titles에는 데이터가 있다. 
+- 테이블에 대한 의미와 연결고리를 가져와야 한다.
+- 성능이 IN이 더 좋다.
 
--- 사원 중에 직무가 'Engineer'와 'Senior Engineer'인 
--- 사원의 사번을 출력해보세요
--- employees의 필드에는 직무가 없다..!
--- titles에는 데이터가 있다. 
--- 테이블에 대한 의미와 연결고리를 가져와야 한다.
-
--- 성능이 IN이 더 좋다.
-
+```sql
 SELECT *
 FROM   titles
 WHERE title IN ('Engineer', 'Senior Engineer')
 ;
+```
+
+##### Q. 사원중에서 직무가 'Engineer'로 끝나는 사람과 직무가'Staff' 로 끝나는 사람의 사번을 출력해보세요
+요청 데이터를 어떻게 이해했는가에 따라서 나오는 쿼리가 달라질 수 있으므로 명확하게 이해하도록 노력하자! 
 
 
--- 문2)사원중에서 직무가 'Engineer'로 끝나는 사람과
--- 직무가'Staff' 로 끝나는 사람의 사번을 출력해보세요
-
+```sql
 SELECT emp_no, title
 FROM   titles
 WHERE  title LIKE  '%Engineer' 
 OR     title LIKE '%Staff' 
 ;
-
 
 SELECT emp_no, title
 FROM   titles
@@ -448,12 +509,12 @@ AND title = 'Engineer'
 AND title = 'Staff'
 ;
 
--- 요청 데이터를 어떻게 이해했는가에 따라서 나오는 쿼리가 달라진다. 
--- 직무가 staff 로 끝나는 사ㅏㄻ의 사번을 출력해주세요
+```
 
 
+#### NULL, 값이 없을 경우!
 
--- NULL 값이 없다. 
+- NULL 값이 없음을 나타내는 연산자 
 -- <필드명> IS NULL : 값이 없을 경우
 -- <필드명> IS NOT NULL : 값이 NULL이 아닐 경우
 -- 사원 중에서 salary가 NULL이 아닌 사원의 정보를 가져와 보자.
@@ -463,6 +524,39 @@ FROM   salaries
 WHERE salary IS NOT NULL 
 ORDER BY salary
 ;
+
+
+
+
+
+
+
+
+
+
+
+```python
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- 문제3) 사원 중에서 직무가 'Development' 이거나 
