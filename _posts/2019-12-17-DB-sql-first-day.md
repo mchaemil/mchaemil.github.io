@@ -150,6 +150,7 @@ USE employees;
 SELECT emp_no, hire_date 
 FROM employees 
 LIMIT 5
+;
 ```
 
 | emp_no | hire_date | 
@@ -161,10 +162,55 @@ LIMIT 5
 | `10005` | 1989-09-12 |  
 
 
-
 -------------------
 
 
+#### 존재하는 테이블 목록 보기
+
+```sql
+SHOW TABLES
+;
+
+```
+
+#### 질문을 하나 던지기!, 사원 테이블에서 사원들의 이름만 가져와 보자
+
+```sql
+SELECT first_name, last_name
+FROM employees
+;
+```
+
+
+#### WHERE 
+##### WHERE 조건: 조건에 만족하는 데이터만 가져온다. 
+##### Q. 사원 테이블에서 이름이 'Elvis'인 사람의 정보를 가져와 보자
+**데이터 검증**
+쿼리문을 작성한 이후 얻어온 데이터에서 내가 원하는 데이터가 들어있는지, 혹은 제외시켰는데 들어가 있는지 꼭 확인해보아야 한다.
+
+```sql
+SELECT * 
+FROM employees
+WHERE first_name = 'Elvis'
+;
+
+```
+
+##### Q. 사원테이블에서 성이 'Simel'인 사람인 정보를 가져와 보자.
+
+```sql
+SELECT *
+FROM employees
+WHERE last_name = 'Simmel'
+;
+```
+
+
+```sql
+
+
+
+```
 
 
 
@@ -172,28 +218,8 @@ LIMIT 5
 
 
 
-# 존재하는 테이블 목록 보기
-SHOW TABLES
 
--- 질문을 하나 던지기!, 사원 테이블에서 사원들의 이름만 가져와 보자
-SELECT first_name, last_name
-FROM employees;
 
--- 사원 테이블에서 이름이 'Elvis'인 사람의 정보를 가져와 보자
--- WHERE 절
--- WHERE 조건: 조건에 만족하는 데이터만 가져온다. 
--- 내가 원하는 데이터가 들어있는지, 제외시켰는데 들어가 있는지 꼭 확인해보아야 한다.
-
-SELECT * 
-FROM employees
-WHERE first_name = 'Elvis'
-;
-
--- 사원테이블에서 성이 'Simel'인 사람dml wjdqhfmf 정보를 가져와 보자.
-SELECT *
-FROM employees
-WHERE last_name = 'Simmel'
-;
 
 # 테이블에서 내가 원하는 데이터를 뽑아내느게 능력이다. 스스로 조건에 맞는 처리를 할 수 있어야 한다. 
 
