@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Python/가상환경 | python 프로그래밍을 위한 가상환경 설정하기(feat. virtualenv, VSCode, Python, Django )
-tags: Python
+tags: python
 
 ---
 

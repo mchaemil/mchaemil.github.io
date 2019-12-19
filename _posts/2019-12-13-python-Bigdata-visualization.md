@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Python/Bigdata | python matplotlib으로 기상자료개발 포털에서 기후통계 분석 및 시각화 
-tags: Python
+tags: python
 
 ---
 
