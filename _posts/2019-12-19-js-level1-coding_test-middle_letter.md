@@ -30,11 +30,11 @@ tags: algorithm
 
 > 주어진 단어 string의 가운데 글자를 반환하는 함수, solution을 만들어 보세요. 단어의 길이가 짝수라면 가운데 두글자를 반환하면 됩니다.
 
-**재한사항**  
+**제한 사항**  
 - 주어진 단어 string은 길이가 1 이상, 100이하인 스트링입니다.
 
 
-입출력 예
+입출력 예시
 
 | string | return | 
 |---|:---:|---:|
@@ -46,7 +46,6 @@ tags: algorithm
 
 
 ```javascript
-
 function solution(s) {
     var answer = '';
     var data
@@ -63,7 +62,6 @@ function solution(s) {
     return answer;
 }
 
-
 ```
 
 #### 나의 첫 번째 풀이 사고의 과정
@@ -71,9 +69,11 @@ function solution(s) {
 1. 주어진 단어 string을 변수로 넘겨 받을 때, 나머지 연산자를 사용해서 2로 나눈 후 그 값을 통해 문자열의 길이가 짝수인지, 홀수인지 확인
 1. 문자열의 길이를 확인 후 나누기 연산자로 잘라야겠다고 생각
 1. 나누기 연산자로 글자를 자른 후 짝수라면, 자른 글자와 자른 글자의 index - 1의 글자를 return 
-1. 홀수라면, string의 인덱스에 floor(), 즉 내림한 값을 대입
+1. 홀수라면, string의 인덱스에 floor(), 즉 내림한 값을 대입하고 return
 
 
+
+_posts/2019-12-18-DB-sql-second-day.md
 
 
 
