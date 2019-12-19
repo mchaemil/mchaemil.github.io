@@ -74,7 +74,6 @@ function solution(s) {
 
 
 
-_posts/2019-12-18-DB-sql-second-day.md
 
 
 
