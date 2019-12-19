@@ -527,74 +527,32 @@ ORDER BY salary
 
 
 
+- 사원 중에서 직무가 'Development' 이거나 'Sales'인 사람들 중에서 1992년 01월 01일 이후에 배치된 사람 사번을 구해봅시다. 
 
 
-
-
-
-
-
-
-```python
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- 문제3) 사원 중에서 직무가 'Development' 이거나 
--- 								  'Sales'인 사람들 중에서 
--- 1992년 01월 01일 이후에 배치된 사람 사번을 구해봅시다. 
-
+```sql
 SELECT *
 FROM   departments
 -- WHERE title = 'Sales'
 -- WHERE  title IN ('Development', 'Sales') 
 -- AND    DATE_FORMAT(emp.hire_date, '%Y%m%d') = 1990
 ; 
+```
 
--- 한 번에 쿼리를 하는 것으로는 안 된다. 
--- 지금 우리가 안 배웠으니까. 데이터가 있는지를 확인하는 게 우선 작업이다. 
 
+
+
+한 번에 쿼리를 하는 것은 어려운 작업이다. 
+데이터가 있는지를 확인하는 게 우선이며, 차근차근 커리를 만들어가는 연습을 진행한다.
+
+```sql  
 SELECT dept_no
 FROM   departments
 WHERE  dept_name IN ('Development', 'Sales') 
 ;
-
--- d005, d007
-
-SELECT emp_no
-FROM dept_emp
-WHERE dept_no IN ('d005', 'd007') LIMIT 10
-;
-
--- 뎁트 넘버로 사번으 떙긴다. 사번으로 입사한 날짜로 제한을 주면 끝낸다. 
-
-SELECT *
-FROM   dept_emp
-WHERE  dept_no IN ('d005', 'd007')
-AND    DATE_FORMAT(from_date, '%Y%m%d') >= '19920101'
-AND    DATE_FORMAT(to_date, '%Y%m%d') = '99990101'
-ORDER BY from_date DESC
-;
-
-
-
 ```
+
+
+
+
+
