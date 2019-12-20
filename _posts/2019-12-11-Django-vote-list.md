@@ -280,8 +280,7 @@ def results(request, question_id):
 		
 ```
 
-### 4. Template 코딩
-
+### 4. MVT 패턴을 위한 세 번째, Template 코딩
 
 
 ```
