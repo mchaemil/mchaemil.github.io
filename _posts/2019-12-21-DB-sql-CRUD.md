@@ -36,13 +36,9 @@ comments: true
 ----
 
 
-<div style="width:100%;">
-<canvas id="canvas" height="300"></canvas>
-</div>
+```chart
 
-<script>
-
-new Chart(document.getElementById("canvas"), {
+{
     type: 'bar',
     data: {
         labels: ['가가가가가가가가가가가가가가', '나나나나나나', '다다다다다다', '라라라라라라', '마마마', '바바바바바바바', '사사사사사사사사', '아아아아아아', '자자자자', '차차차차차차차', '카카카카카카카'],
@@ -116,7 +112,6 @@ new Chart(document.getElementById("canvas"), {
     }
 });
 
-</script>
-
+```
 
 
