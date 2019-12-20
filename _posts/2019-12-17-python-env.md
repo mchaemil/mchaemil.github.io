@@ -7,7 +7,8 @@ tags: python
 
 ## **Today What I Learend**  
 
-독립된 환경을 구축하기 위해서
+하나의 운영체제에서 다양한 버전의 프로그래밍 언어를 사용해야 할 경우 발생할 수 있는 문제들을 해결하는 데 도움을 주는 기술인 가상환경에 대해서 학습했다.  
+아직은 다양한 버전의 파이썬을 사용하지 않으므로 이 가상환경이란 기법에서 어떠한 위력을 느껴지는 못했지만 운영체제의 폴더 구조에서 독립된 환경을 구축하기 위해서 조금씩 꾸준히 사용해서 익숙해지는 연습을 하자!
 
 
 ---
@@ -15,15 +16,15 @@ tags: python
 
 - VSCode 에 python 설치, Windows 설정
 - VSCode 에 python 설치, Mac 설정
-
-- virtualenv 로 프로젝트 시작
+- venv로 프로젝트 생성하는 법
+- virtualenv 로 프로젝트 생성하는 법
 
 
 ---
 
 
 ### VSCode 에 Python 설치 
-#### Windows
+#### Windows 에서 설치
 1. Python 설치 후 Path 연결 
 1. VSCode 도 가능하면 같은 폴더 구조에서 설치하기  
 1. VSCode 실행 후 Extension에서 Python 설치
@@ -69,7 +70,7 @@ tags: python
 
 ```
 
-#### Mac
+#### Mac 에서 설치
 
 1. Python 설치 후 
 1. VSCode 를 실행하여, Shell Command: Install 'code'command in PATH 를 연결
@@ -121,14 +122,14 @@ tags: python
 ```
 
 
-
-### 파이썬 가상환경 설정
 의문을 가지고 해결을 해야 실력이 향상될 수 있다. 
-가상환경을 쓰는 이유
 
-다양한 버젼의 파이썬을 설치하면, 한 운영체제에 여러개를 설치하면 잘 안될 수도 있다. 
-그리고 특정 어플리케이션은 3.6가 필요한데, 이를 지원이 안된다면..! 곤란...!
+### 파이썬 가상환경 설정  
 
+#### 파이썬 가상환경을 사용해야 하는 이유
+한 운영체제에 다양한 버전의 파이썬을 설치해서 사용하다보면 문제가 발생할 수도 있다. 가령 특정 어플리케이션은 파이썬 3.6버전이 필요한데, 현재 운영체제에서 이를 사용하지 못하는 상황이 생긴다면 곤란한 일이 발생한다! 
+
+#### 파이썬 가상환경이 주는 이점
 | 가상환경A | 가상환경B | 가상환경C |
 |---|:---:|---:|
 | Python 3.5 | Python 2.7 | Python 3.4 |
@@ -136,14 +137,12 @@ tags: python
 | Web |  Data 분석 | Gui Application |
 
 
-프로젝트를 위한 가상환경은 A, B, C 로 구분하고
-장고, 넘파이, 파이큐티로 지유아이 앱을 만든다면
+프로젝트를 위한 가상환경은 A, B, C 로 구분하고 각각 장고, 넘파이, 파이큐티를 활용해 목적에 따른 작업을 진행한다고 한다고 할 때!, **가상환경을 사용할 때는 프로젝트가 끝나면 폴더만 지우면 된다!** 가상환경은 별개의 모듈을 사용하므로써 파이썬의 버전이 엉키는 일 없는 환경을 구축하게 해준다. 
 
-프로젝트가 끝나면 폴더만 지운다!
-별개의 가상환경으로 별개의 모듈을 사용함으로서 
+**프로젝트가 끝나면 그저 폴더만 지우면 된다!** 이러한 이유가 가상환경이 주는 가장 큰 이점이라고 한다.!
 
-엉키고 설키는 일 없이
-깔끔하게 환경을 구성할 수 있다. 
+
+### venv, 가상환경을 만드는 첫 번째 방법
 
 **가상환경을 작업하는 순서**
 
@@ -200,39 +199,11 @@ print(simplejson.dumps(test_dict, sort_keys=True, indent=4 * ' '))
 
 ```
 
-### Pyenv로 파이썬 버전 관리하기
-[PYENV로 파이썬 버전 관리하기](http://jeonghwan-kim.github.io/2016/08/11/pyenv.html)
 
 
 
-
-### 장고 가상환경 설정
-
-
-#### 장고 프로젝트 구축 순서
-1. 가상환경 폴더로 이동 후 `activate`! 
-1. `activate` 실행 후 Root folder로 빠져나오기
-1. `pip install django`
-1. `django-admin startproject <project_name>`
-1. `cd <project_name>` 
-1. `django-admin startapp <app_name>`
-
-```
-Root Folder
-
-<project_name>
-└──<project_name>
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-├──	<app_name>
-├── db.sqlite3
-└── manage.py
-```
-
-#### 가상환경을 만드는 두 번째 방법
-**virtualenv** 사용하기
+### virtualenv, 가상환경을 만드는 두 번째 방법  
+**virtualenv** 사용하기  
 `pip install virtualenv` 명령으로 virtualenv가 설치되었다면
 `virtualenv django_pjt1` 과 같은 virtualenv + <프로젝트 이름>으로 가상환경을 구축할 수 있다. 
 
@@ -251,26 +222,44 @@ Root Folder
 맥의 경우는 가상환경으로 진입해 activate를 실행할 때 source를 입력해야 하고, 윈도우는 그냥 activate를 입력하면 된다. 
 
 
-
----
-**오류 발생시**  
-- python3 -m venv env => (가상환경 파일을 생성?)
-- source ./env/bin/activate   
-- python -m pip install google-assistant-sdk[samples] 
-
 ---
 
+### 가상환경 설정 후 장고 프로젝트 실행하는 법
+
+#### 장고 프로젝트 구축 순서
+1. 가상환경 폴더로 이동 후 `activate`! 
+1. `activate` 실행 후 Root folder로 빠져나오기
+1. `pip install django`
+1. `django-admin startproject <project_name>`
+1. `cd <project_name>` 
+1. `django-admin startapp <app_name>`
+
+```
+<Root Folder>
+|
+<project_name>
+└──<project_name>
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+├── <app_name>
+├── db.sqlite3
+└── manage.py
+```
 
 
-virtualenv &lt;project name&gt;
-source &lt;project name&gt;/bin/activate => 앞에 이 환경을 쓰고 있다는 문자열이 생긴다. 윈도우 사용자는 source는 빼고 입력
 
-가상환경을 만든 후 그 속에 pip3 install django를 설치
+**장고 프로젝트 구축을 virtualenv를 사용했을 경우의 순서**
+1. virtualenv &lt;project name&gt;
+2. source &lt;project name&gt;/bin/activate => 앞에 이 환경을 쓰고 있다는 문자열이 생긴다. 윈도우 사용자는 source는 빼고 입력
+3. 가상환경을 만든 후 그 속에 pip3 install django를 설치
+4. django-admin startproject &lt;project name&gt; => config 같은 느낌의 폴더, 프로젝트 디렉토리 네임이랑 프로젝트 이름이랑 같게 하니.. 헷갈...리지만 일단 생성!
+5. cd &lt;project name&gt;
+6. django-admin startapp &lt;app name&gt; # 애플리케이션의 이름
 
 
-django-admin startproject &lt;project name&gt; => config 같은 느낌의 폴더, 프로젝트 디렉토리 네임이랑 프로젝트 이름이랑 같게 하니.. 헷갈...
 
-cd &lt;project name&gt;
+#### 참고자료
 
-django-admin startapp &lt;app name&gt; # 애플리케이션의 이름
-
+**[PYENV로 파이썬 버전 관리하기 - 링크](http://jeonghwan-kim.github.io/2016/08/11/pyenv.html)**
