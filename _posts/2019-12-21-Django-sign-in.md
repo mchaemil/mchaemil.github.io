@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Django/Sign in | 장고로 회원가입 기능 만들어보기
+comments: true
 tags: Django
 
 ---
