@@ -1,6 +1,5 @@
 ---
 layout: article
-comments: true
 title: Database/Data | MariaDB - CRUD 실습해보기
 tags: SQL
 comments: true

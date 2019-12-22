@@ -118,11 +118,11 @@ sharing:
 ## => Comments
 ##############################
 comments:
-  provider: 'disqus' # false (default), "disqus", "gitalk", "valine", "custom"
+  provider: disqus 
 
   ## Disqus
   disqus:
-    shortname: "haemil-blog" # the Disqus shortname for the site
+    shortname: haemil-blog # the Disqus shortname for the site
 
   ## Gitalk
   # please refer to https://github.com/gitalk/gitalk for more info.
@@ -212,7 +212,7 @@ defaults:
       aside:
         toc: true
       show_edit_on_github: false # true
-      show_subscribe: true
+      show_subscribe: false # true
       pageview: true
 
 
