@@ -118,7 +118,7 @@ sharing:
 ## => Comments
 ##############################
 comments:
-  provider: disqus # false (default), "disqus", "gitalk", "valine", "custom"
+  provider: 'disqus' # false (default), "disqus", "gitalk", "valine", "custom"
 
   ## Disqus
   disqus:
@@ -214,7 +214,6 @@ defaults:
       show_edit_on_github: false # true
       show_subscribe: true
       pageview: true
-	  comments: true
 
 
 ## => Plugins
