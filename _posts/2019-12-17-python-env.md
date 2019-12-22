@@ -206,17 +206,17 @@ print(simplejson.dumps(test_dict, sort_keys=True, indent=4 * ' '))
 ### virtualenv, 가상환경을 만드는 두 번째 방법  
 **virtualenv** 사용하기  
 `pip install virtualenv` 명령으로 virtualenv가 설치되었다면
-`virtualenv django_pjt1` 과 같은 virtualenv + <프로젝트 이름>으로 가상환경을 구축할 수 있다. 
+`virtualenv env` 와 같은 virtualenv + <가상환경 폴더이름>으로 가상환경을 구축할 수 있다. 
 
 
 
-`pip3 install virtualenv`
+`pip3 install virtualenv`  => Mac에서는 `pip3` 명령을 사용해야 함
 [파이썬 가상환경 설정시 Errno 13, Permission denied 오류 발생할 때](https://github.com/googlesamples/assistant-sdk-python/issues/236)
 
 
 **첫 번째 구축 순서와 같음, 명령어만 다름**
-1. `pip install virtualenv` 명령으로 virtualenv 설치 
-1. 설치되었다면 `virtualenv django_pjt1` 과 같은 virtualenv + <프로젝트 이름>으로 가상환경을 구축할 수 있다. 
+1. `pip install virtualenv` 명령으로 virtualenv 설치 (Mac에서는 pip3)
+1. 설치되었다면 `virtualenv env` 와 같은 virtualenv + <가상환경 폴더이름> 으로 가상환경을 구축할 수 있다. 
 1. 가상환경을 구축하고 프로젝트 생성 순서는 위와 같음
 
 **Tip.**  

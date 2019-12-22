@@ -19,7 +19,6 @@ tags: Django
 - Model coding
 - View coding
 - Template coding
-- 
 
 ---
 
@@ -28,7 +27,6 @@ tags: Django
 
 데이터베이스 테이블 설계는 독립적이므로 Model(모델)을 먼저 코딩하고, 그 다음 서로 연결되어 있는 뷰와 템플릿 중에서는 템플릿을 먼저 코딩하는 방식으로 진행했다!
 
-다만 글은 모델, 뷰, 템플릿 순으로 소개!
 
 ```mermaid
 graph TB;
@@ -74,32 +72,52 @@ graph TB;
 
 **모델에서 클래스를 작성할 때는 장고의 모델 클래스를 상속 받아야만 한다 이건 규칙이다.**
 
-username과 password는 문자열을 담을 수 있는 필드로 만들고, 등록일은 registered_dttm라는 데이트 타임의 약자로 만들고, DateTimeField의 인자로는 auto_now_add 값 True를 넣어주는데, 이를 통해 클래스가 저장되는 시점의 시간이 자동으로 저장되므로 현재 시간을 계산해서 따로 넣어줄 필요가 없다.
+username과 password는 문자열을 담을 수 있는 필드로 만들고, 등록일은 registered_dttm(데이트 타임의 약자)라는 프로퍼리로 만들었다. DateTimeField의 인자로는 auto_now_add=True를 넣어주는데, 이를 통해 클래스가 저장되는 시점의 시간이 자동으로 저장되므로 현재 시간을 계산해서 따로 넣어줄 필요가 없다.
 
+
+```python
+from django.db import models
+
+# Create your models here.
+class User(models.Model):
+	username = models.CharField(max_length=32, verbose_name='사용자명')
+    password = models.CharField(max_length=64, verbose_name='비밀번호')
+    registered_dttm = models.DateTimeField(auto_now_add=True, verbose_name='등록일')
+
+```
 
 #### Admin 페이지에서 테이블을 표기하는 두 가지 방법
 
-**첫 번째 방법**
+#### 첫 번째 방법
 
-
-
+##### 1-1. str 메서드 사용  
 클래스가 문자열로 변환되었을 때, 어떻게 변환할지 결정하는 함수가 있다. 이를 사용해서 모델 클래스를 작성하면서 사용한 변수명으로 관리자 페이지에 보여질 정보를 개선할 수 있다.
+
+클래스에서 ___str_\_\_ 메서드 사용을 통해 username으로 반환하도록 변경할 수 있다.
 
 ```python
 def __str__(self):
 	return self.username
 ```
 
-클래스에서 ____str__ 메서드 사용을 통해 username으로 반환하도록 변경할 수 있다.
-
+##### 1-2. Meta 클래스 사용  
 
 클래스안에 `class Meta` 클래스를 사용해 테이블 이름을 지정할 수 있다! `Meta` 클래스의 property `db_table`, `verbose_name` 에 값을 할당하여 장고에게 내가 원하는 이름을 전달할 수 있다.
 이렇게 `class Meta`를 통해서 테이블명을 지정하는 이유는 기본적으로 생성되는 앱들과 구분하기 위해서이다.
 
-장고 어드민에서는 어플리케이션의 모델을 보여줄 때 기본적으로 복수형을 보여주기 때문에 복수형에 대해서도 따로 설정해주는 것이 좋다.
+장고 어드민에서는 어플리케이션의 모델을 보여줄 때 기본적으로 복수
+형을 보여주기 때문에 복수형에 대해서도 따로 설정해주는 것이 좋다.
 
 
+```python
+class Meta:
+	db_table = 'app_user'
+	verbose_name = '사용자'
+	verbose_name_plural = '사용자'
+```
 
+
+#### Model 전체 코드
 ```python
 from django.db import models
 
@@ -119,9 +137,9 @@ class User(models.Model):
 ```
 
 
-#### Admin coding
+#### 두 번째 방법
 
-**두 번째 방법**
+##### Admin coding 을 통한 방법
 
 Admin 페이지의 리스트에서 더 많은 정보를 원할 때는 어드민 클래스 안에 명시할 수 있다.
 list_display 라는 필드에 내가 출력하고 싶은 필드를 선택할 수 있다. 이렇게 명시를 하게 되면 클래스 객체가 리스트업이 되는 게 아니라 모델 클래스 안에 있는 필드들이 리스트 업이 된다.
@@ -141,11 +159,54 @@ admin.site.register(User, UserAdmin)
 
 
 ### View coding
-url을 연결하면 요청정보가 request 를 통해 들어온다.
-레지스터로 들어오는 요청이 두가지가 생긴다.
-주소 유알엘로 들어오는 경우, 등록 버튼을 누를 때인 경우
+url을 통해서 사용자 요청정보가 request 를 통해 들어온다.
+이 때 레지스터로 들어오는 요청은 두 가지가 생긴다. 주소 URL로 들어오는 경우와 `Submit` 버튼을 눌러서 들어오는 경우이다.
 
-		
+#### URL을 통해서 들어오는 경우
+
+URL을 통해서 들어오는 경우를 구분하기 위해서 request 정보의 method를 통한 정보를 전송하는 방식을 확인하고, 값이 'GET'이라면 render 단축함수의 인자로 request와 template을 전송한다.
+
+```python
+if request.method == 'GET':
+  return render(request, 'register.html')
+
+```
+
+
+#### Submit 버튼을 통해서 들어오는 경우
+
+request 정보의 method를 통해 들어온 값이 'POST'라고 한다면 render 단축함수의 인자로 request와 template 그리고 template으로 함께 전달할 정보를 전송한다
+
+input 태그를 통해 전달받은 사용자 데이터를 저장하기 위해서 input 태그의 Attribute 중 name 을 key값으로 하고, value를 가져온다. 
+
+`get('username', None)` 메서드를 통해서 대상의 값이 없다면 None 을 저장하고, 아래쪽의 조건문을 통해서 데이터가 유효하게 입력되었는지 검증한다. 
+
+데이터를 검증한 후, 객체에 담아서 template에 전달하여 사용자의 입력값이 올바르지 않다면 그 처리를 반환한다.
+
+```python
+if request.method == 'POST':
+  username = request.POST.get('username', None)
+  password = request.POST.get('password', None)
+  re_password = request.POST.get('re-password', None)
+	
+  err_data = {}	
+  if not (username and password and re_password):
+	err_data['info_error'] = '회원정보가 올바르게 입력되지 않았습니다.'
+  elif password != re_password:
+	err_data['password_error'] = '비밀번호가 다릅니다.'
+  else:
+	user = User(
+		username=username,
+		password=make_password(password)
+	)
+	user.save()
+
+return render(request, 'register.html', err_data)
+
+```
+
+#### View 전체 코드
+
 ```python
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -154,15 +215,15 @@ from .models import User
 
 def register(request):
 
-if request.method == 'GET':
+  if request.method == 'GET':
 	return render(request, 'register.html')
-elif request.method == 'POST':
+  elif request.method == 'POST':
 	username = request.POST.get('username', None)
 	password = request.POST.get('password', None)
 	re_password = request.POST.get('re-password', None)
 	
 	err_data = {}	
-	 if not (username and password and re_password):
+	if not (username and password and re_password):
 		err_data['info_error'] = '회원정보가 올바르게 입력되지 않았습니다.'
 	elif password != re_password:
 		err_data['password_error'] = '비밀번호가 다릅니다.'
