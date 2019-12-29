@@ -96,7 +96,8 @@ doc =
 
 #### 관계형 DB 테이블 구조로 변환해서 ERD 작성
 
-[ERD Cloud](https://www.erdcloud.com/d/o7q5xcQuyHSf8MtfP) 를 관계형 데이터베이스에서 사용될 수 있는 논리적 모델로 바꾸는 연습을 해보았다.
+[ERD Cloud](https://www.erdcloud.com/d/o7q5xcQuyHSf8MtfP)   
+MongoDB Document를 보고 관계형 데이터베이스에서 사용할 수 있는 논리적 모델로 바꾸는 연습을 해보았다.
 
 > 아직은 부족한 부분이 많지만 이 한 걸음을 시작으로..! 계속 발전해야겠다.! 그래도 아직까지는 어렵다는 생각보다는 이런 걸 그려본다는 사실이 신기하고 재미있다!
 
