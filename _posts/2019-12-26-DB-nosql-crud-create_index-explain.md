@@ -46,9 +46,45 @@ getIndex()로 확인해볼 수 있다.
 find({key: {$gt}})
 
 
-#### or 와 and를 사용할 때의 기본적인 규칙
 
-**암시적인 and**를 활용하는 방법
+
+
+### MongoDB의 실행
+
+MongoDB의 실행은 명령 프롬프트에 아래와 같이 입력을 통해 할 수 있다. 셸 프로그램이 시작했다면 MongoDB의 버전과 현재 선택된 데이터 베이스를 볼 수 있다. 
+
+```
+mongo
+
+MongoDB shell version v3.6.16
+```
+
+
+### MongoDB의 CRUD
+
+
+### CREATE
+
+```
+> db.users.insert({user:'haemil'})
+WriteResult({"nInserted": 1})
+```
+
+### READ
+
+#### find의 인자로 query selector 넘기기(질의 술어)
+
+query selector는 컬렉션에 있는 모든 도큐먼트에 대해 일치 여부를  검사하기 위한 조건으로 사용된다. 
+
+```
+> db.users.find({user:'haemil'})
+{ "_id" : ObjectId("5e02da57816fc7cac0c038cd"), "name" : "haemil" }
+```
+
+
+#### or 와 and를 사용할 때의 기본적인 규칙
+**암시적인 and**를 활용하는 방법  
+질의 술어는 반환되는 document와 같다.
 
 ```
 db.users.find({name:'haemil', country:'대한민국'}).pretty()
@@ -61,6 +97,7 @@ db.users.find({name:'haemil', country:'대한민국'}).pretty()
 ```
 
 **명시적인 and 연산자**를 활용하는 방법
+
 
 ```
 db.users.find({ $and: [
@@ -88,53 +125,17 @@ db.users.find({ $or: [
 
 ```
 
+#### or, and 연산자는 암시적인 방법과는 다르게 질의 그 자체가 하나의 도큐먼트이다. 
 
 
-### MongoDB의 실행
-
-MongoDB의 실행은 명령 프롬프트에 아래와 같이 입력을 통해 할 수 있다. 셸 프로그램이 시작했다면 MongoDB의 버전과 현재 선택된 데이터 베이스를 볼 수 있다. 
-
-```mongodb
-mongo
-
-MongoDB shell version v3.6.16
-```
 
 
-### MongoDB의 CRUD
-
-
-### CREATE
-
-```mongodb
-> db.users.insert({user:'haemil'})
-WriteResult({"nInserted": 1})
-```
-
-### READ
-
-#### find의 인자로 query selector 넘기기(질의 술어)
-
-```mongodb
-> db.users.find({user:'haemil'})
-{ "_id" : ObjectId("5e02da57816fc7cac0c038cd"), "name" : "haemil" }
-```
-
-
-#### $and, $or 연산자
-
-```mongodb
-> db.users.find({$or:[ {name:'smith'}, {name:'haemil'} ]})
-{ "_id" : ObjectId("5e01e6343370526bbddf751c"), "name" : "haemil" }
-{ "_id" : ObjectId("5e054fa9c049d100929f2430"), "name" : "smith" }
-
-```
 
 ### UPDATE
 
 이 업데이트 쿼리는 name이 haemil인 document를 찾아서 country값을 '대한민국'으로 바꿀 것을 지시한다. 
 
-```mongodb
+```
 > db.users.update({name:'haemil'}, {$set:{country: '대한민국'}}))
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 > db.users.find({name:'haemil'})                            '}})
@@ -145,18 +146,22 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 
 
+
+
+
+
 ### DELETE
 
 remove 메서드의 인자로 document가 주어지지 않으면 collection의 모든 도큐먼트를 지운다. 
 
-```mongodb
+```
 > db.users.remove()
 
 ```
 
 조건에 해당하는 document를 지워야 할 때에는 remove 메서드의 인자로 query selector인 document를 넘겨주면 된다.
 
-```mongodb
+```
 > db.users.remove({name:'smith'})
 WriteResult({ "nRemoved" : 1 })
 
@@ -205,9 +210,9 @@ where 조건
 2. 어떤 키와 키에 들어갈 value를 찾고(이 작업을 수행하는 건 업데이트 함수)
 3. 첫 번째 
 
-
+```
 users.update({username:'smith'}, {$set: {country: 'Canade'}})
-
+```
 
 
 #### 업데이트는 2가지 방법이 존재한다.
@@ -216,10 +221,12 @@ users.update({username:'smith'}, {$set: {country: 'Canade'}})
 #### unset 
 
 unset 연산자.
-
+```
 db.users.update({username:'smith'}, {$unset: {country: 1}})
-**숫자 1은 의미가 없다, 관용적으로 1을 주거나 널을 준다. 키만 준다** 
+```
 
+**숫자 1은 의미가 없다, 관용적으로 1을 주거나 널을 준다. 키만 준다** 
+```
 {
     username: 'tmaltm'
     favorites: {
@@ -228,7 +235,7 @@ db.users.update({username:'smith'}, {$unset: {country: 1}})
     }
 
 }
-
+```
 위의 것을 관계 모델로 만들면
 테이블이 최소 3개가 필요하다.
 배열 구조가 나오면 하나의 테이블로 여기는데
@@ -361,15 +368,17 @@ upsert 여부..! (UPDATE insert)를 말한다.
 
 4번째 인자로는 허용할 것인지에 대한 여부 
 조건을 만족하는 게 여러개면 다 업데이트 한다. 
+```
  if (multi) { multi가 트루라면!
         updateOp.update(obj); # 다 업데이트 해준다!
     } else {
         updateOp.updateOne(obj); # 첫 번째 문서만 업데이트 해준다!
     }
+```
 
-
+```
 db.users.remove({'favorites.cities': "Cheyenne"})
-
+```
 Cities 정보를 가지고 있는 문서를 제거하고 싶을 때는 
 remove 라는 fucntion을 사용한다. 
 
@@ -377,8 +386,9 @@ favorites.cities 를 없애고 싶다면!!!!! unset을 사용한다.
 
 
 #### 컬렉션을 지우고 싶을 떄는!!
+```
 db.users.drop()
-
+```
 
 
 
@@ -578,66 +588,6 @@ ns, 이름공간은 다른 이름과 충돌을 방지하기 위해서 사용한�
 읽어들이는 메모리의 크기가 달라진다. 
 
 
-```
-
-{
-        "queryPlanner" : {
-                "plannerVersion" : 1,
-                "namespace" : "test.numbers",
-                "indexFilterSet" : false,
-                "parsedQuery" : {
-                        "num" : {
-                                "$gt" : 19995
-                        }
-                },
-                "winningPlan" : {
-                        "stage" : "COLLSCAN",
-                        "filter" : {
-                                "num" : {
-                                        "$gt" : 19995
-                                }
-                        },
-                        "direction" : "forward"
-                },
-                "rejectedPlans" : [ ]
-        },
-        "executionStats" : {
-                "executionSuccess" : true,
-                "nReturned" : 4,
-                "executionTimeMillis" : 9,
-                "totalKeysExamined" : 0,
-                **"totalDocsExamined" : 20000,** 중요한 정보!
-                "executionStages" : {
-                        "stage" : "COLLSCAN",
-                        "filter" : {
-                                "num" : {
-                                        "$gt" : 19995
-                                }
-                        },
-                        "nReturned" : 4,
-                        "executionTimeMillisEstimate" : 0,
-                        "works" : 20002,
-                        "advanced" : 4,
-                        "needTime" : 19997,
-                        "needYield" : 0,
-                        "saveState" : 156,
-                        "restoreState" : 156,
-                        "isEOF" : 1,
-                        "invalidates" : 0,
-                        "direction" : "forward",
-                        "docsExamined" : 20000
-                }
-        },
-        "serverInfo" : {
-                "host" : "DESKTOP-M85PIKG",
-                "port" : 27017,
-                "version" : "3.6.16",
-                "gitVersion" : "204ab367a130a4fd2db1c54b02cd6a86e4e07f56"
-        },
-        "ok" : 1
-}
-
-```
 
 #### 할당 단위 크기
 
