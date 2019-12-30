@@ -22,7 +22,6 @@ MongoDB 에서 자바스크립트 셸을 통해서 document를 CRUD하는 과정
 ---
 
 
-### 191226 학습내용 리뷰
 ### update
 
 두 가지가 가장 중요하다. 아래 내용을 이해했는가?
@@ -47,6 +46,45 @@ find({key: {$gt}})
 
 #### or 와 and를 사용할 때의 기본적인 규칙
 
+**암시적인 and**를 활용하는 방법
+
+```
+db.users.find({name:'haemil', country:'대한민국'}).pretty()
+{
+	"_id" : ObjectId("5e02da57816fc7cac0c038cd"),
+	"name" : "haemil",
+	"country" : "대한민국"
+}
+
+```
+
+**명시적인 and 연산자**를 활용하는 방법
+
+```
+db.users.find({ $and: [
+	{name:'haemil'}, 
+	{country:'대한민국'}
+]}).pretty()
+{
+	"_id" : ObjectId("5e02da57816fc7cac0c038cd"),
+	"name" : "haemil",
+	"country" : "대한민국"
+}
+
+```
+
+**명시적인 or 연산자**를 활용하는 방법
+
+```
+db.users.find({ $or: [
+	{name:'haemil'}, 
+	{username:'smith'}, 	
+]}).pretty()
+
+{ "_id" : ObjectId("5e02da57816fc7cac0c038cd"), "name" : "haemil", "country" : "대한민국" }
+{ "_id" : ObjectId("5e0a18dea7691c2bb31710aa"), "username" : "smith" }
+
+```
 
 
 
@@ -141,11 +179,12 @@ find의 인자로 넣는 값인 문서가 조건을 나타낸다.
 
 or는 일종의 합집합이다. 
 아래와 같은 구조로 진행된다. 
+```
 $연산자: [
     {},
     {}
 ]
-
+```
 
 #### 갱신 
 
@@ -344,7 +383,7 @@ db.users.drop()
 
 ##### db.numbers.save
 
-
+```
 function (obj, opts) {
     # 객체가 없다면
     if (obj == null)
@@ -362,6 +401,7 @@ function (obj, opts) {
         return this.update({_id: obj._id}, obj, Object.merge({upsert: true}, opts));
     }
 }
+```
 
 obj는 다큐멘트, 
 이런 것을 편의함수라고 한다. !!!
@@ -409,18 +449,21 @@ less than equal 이하
 
 db.numbers.find({num:{'$gt':20, '$lt': 25}})
 
-
+```
 > for(i=0; i < 20000; i++){
 ... db.numbers.save({num: i})
 ... }
 WriteResult({ "nInserted" : 1 })
+
 > db.numbers.count()
 20000
->
+
+```
 
 30에서 35 사이
 
 #### 연산자 종류
+
 $ne = not equal 
 
 
@@ -502,9 +545,9 @@ explain 이라는 함수를 통해서 확인할 수 있다.
 실행통계 괸련 내용을 보여줘
 
 
-
+```
 db.numbers.find({num:{'$gt': 19995}}).explain('executionStats')
-
+```
 
 
 collection 전체 스캔...!
