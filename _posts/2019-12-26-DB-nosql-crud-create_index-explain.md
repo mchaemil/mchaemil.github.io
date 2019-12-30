@@ -8,8 +8,7 @@ comments: true
 
 ## **Today What I Learend**  
 
-MongoDB 에서 자바스크립트 셸을 통해서 document를 CRUD하는 과정을 통해 조금은 MongoDB와 친해지는 경험을 했다.
-
+MongoDB 에서 자바스크립트 셸을 통해서 document를 CRUD하는 과정을 통해 조금은 MongoDB와 친해지는 시간을 가지려 노력했다.
 
 
 ---
@@ -17,7 +16,10 @@ MongoDB 에서 자바스크립트 셸을 통해서 document를 CRUD하는 과정
 
 - MongoDB 실행
 - MongoDB의 CRUD
-- MongoDB 첫 번째 insert
+- CREATE
+- READ
+- UPDATE
+- DELETE
 
 ---
 
@@ -95,17 +97,21 @@ MongoDB의 실행은 명령 프롬프트에 아래와 같이 입력을 통해 �
 ```mongodb
 mongo
 
----
 MongoDB shell version v3.6.16
 ```
 
 
 ### MongoDB의 CRUD
 
+
+### CREATE
+
 ```mongodb
 > db.users.insert({user:'haemil'})
 WriteResult({"nInserted": 1})
 ```
+
+### READ
 
 #### find의 인자로 query selector 넘기기(질의 술어)
 
