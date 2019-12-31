@@ -133,6 +133,8 @@ db.users.find({ $or: [
 
 ### UPDATE
 
+#### set 연산자를 사용한 업데이트
+
 이 업데이트 쿼리는 name이 haemil인 document를 찾아서 country값을 '대한민국'으로 바꿀 것을 지시한다. 
 
 ```
@@ -142,9 +144,46 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "_id" : ObjectId("5e02da57816fc7cac0c038cd"), "name" : "haemil", "country" : "대한민국" }
 ```
 
+#### document를 대치하는 업데이트
+
+`_id`는 같지만 데이터는 update()를 통해서 대체되었다. 도큐먼트는 오직 `fav_food`필드만을 포함한다.
+
+```
+> db.users.update({name:'haemil_1'}, {'fav_food':'hamburger'})
+> db.users.find({'fav_food': 'hamburger'})
+{ "_id" : ObjectId("5e08f6907792b498975db94f"), "fav_food" : "hamburger" }
+
+```
+
+**만약 전체 document를 대치하는 것이 아니라 필드를 추가하거나, 값을 설정하기를 원한다면 반드시 set 연산자를 사용해야 한다**
+
+
+특정 필드에 정보를 저장하는 것을 원하지 않을 때는 unset 연산자를 사용하면 된다. 
+
+```
+> db.users.update({username: 'ham'}, {$unset: {fav_food:1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+> db.users.find({username:'ham'})
+{ "_id" : ObjectId("5e08f6907792b498975db94f"), "username" : "ham" }
+```
+
+
 #### Progressive update
 
+set 연산자를 통해서 아래처럼 
 
+```
+db.users.update({username:'haemil'},
+	{
+		$set: {
+			favorites: {
+				movies: ['Casablanca', 'Rocky']
+			}
+		}
+	}
+)
+```
 
 
 
@@ -166,6 +205,14 @@ remove 메서드의 인자로 document가 주어지지 않으면 collection의 �
 WriteResult({ "nRemoved" : 1 })
 
 ```
+
+#### 컬렉션을 지우고 싶을 떄는!!
+```
+db.users.drop()
+```
+
+
+
 
 
 #### find는 콜렉션에서 조건에 해당 하는 것을 찾을 때 
@@ -384,11 +431,6 @@ remove 라는 fucntion을 사용한다.
 
 favorites.cities 를 없애고 싶다면!!!!! unset을 사용한다. 
 
-
-#### 컬렉션을 지우고 싶을 떄는!!
-```
-db.users.drop()
-```
 
 
 
