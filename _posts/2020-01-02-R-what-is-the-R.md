@@ -378,11 +378,26 @@ vec3
 
 ```
 
+- 표를 보고 문제에 답하기
+
 | `월` | jan | feb | mar | apr | may | jun | jul | aug | sep | oct | nov | dec |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | `지각횟수` | 5 | 4 | 7 | 7 | 5 | 5 | 7 | 6 | 5 | 4 | 4 | 3 |
 
+```r
+late <- c(5, 4, 7, 7, 5, 5, 7, 6, 5, 4, 4, 3)
+names(late) <- c('jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec')
+late
 
+# 7, 9월의 지각횟수를 구하라
+late[c('jul', 'sep')]
+
+# 상반기 결석 평균
+mean(late[1:6])
+
+# 하반기 결석 횟수
+sum(late[7:12])
+```
 
 
 ---
