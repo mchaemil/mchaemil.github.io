@@ -253,7 +253,16 @@ time[c('Sindorim', 'Kkachi')]
 
 #### 벡터의 원소에 재할당
 
+```r
+vec <- c(1,3,5,7,9)
+vec # 1 3 5 7 9
 
+vec[2] <- 2
+vec # 1 2 5 7 9
+
+vec[c(1, 5)] <- c(10, 20)
+vec # 10 2 5 7 20
+```
 
 ### 벡터 연산
 
@@ -279,8 +288,19 @@ a + b # 2 6 6 11 13
 
 ```
 
-#### 벡터에 함수 적용
-- `sum()`, `mean()`, `median()`, `var()`, `sort()`, `range()`, `length()`
+#### 벡터에 적용 가능한 다양한 함수
+
+| 함수 | 설명 | 
+|---|---|
+| `sum()` | 벡터에 포함된 원소들의 합 | 
+| `mean()` | 벡터에 포함된 원소들의 평균 | 
+| `median()` | 벡터에 포함된 원소들의 중앙값 | 
+| `var()()` | 벡터에 포함된 원소들의 분산 | 
+| `sort()` | 원소들의 정렬(asc가 기본) | 
+| `range()` | 벡터에 포함된 원소들의 범위 |
+| `length()` | 벡터에 포함된 원소 개수 | 
+
+
 
 ```r
 ten <- c(1,2,3,4,5,6,7,8,9,10)
@@ -303,6 +323,33 @@ ten[ten > 5] # 6 7 8 9 10
 sum(ten > 5) # 5보다 큰 원소의 개수
 sum(ten[ten > 5]) # 5보다 큰 원소의 합
 ten == 5 # FALSE FALSE FALSE FALSE TRUE FALSE FALSE FALSE FALSE FALSE
+```
+
+### List
+
+벡터(Vector)가 같은 자료형의 값들을 1차원 형태로 저장하는 자료구조라면 
+리스트는 서로 다른 자료형들을 저장하는 자료구조이다.  
+
+```r
+rank <- c(90, 85, 79, 84)
+
+my.info <- list(name='ham', age=30, status=TRUE, score=rank)
+my.info
+```
+
+### Factor
+
+팩터는 문자형 데이터가 저장된 벡터의 한 종류이다. Vector에 저장되는 값들이 몇 종류의 값들로 구분지을 수 있을 때 Factor를 사용한다. 
+
+```r
+bloodtype <- c('A', 'O', 'B', 'O', 'AB', 'AB', 'B')
+bloodtype.new <- factor(bloodtype)
+bloodtype #  "A"  "O"  "B"  "O"  "AB" "AB" "B" 
+bloodtype.new
+# [1] A  O  B  O  AB AB B 
+# Levels: A AB B O
+
+
 ```
 
 
