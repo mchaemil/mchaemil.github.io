@@ -339,7 +339,7 @@ my.info
 
 ### Factor
 
-팩터는 문자형 데이터가 저장된 벡터의 한 종류이다. Vector에 저장되는 값들이 몇 종류의 값들로 구분지을 수 있을 때 Factor를 사용한다. 
+팩터는 문자형 데이터가 저장된 벡터의 한 종류이다. Vector에 저장되는 값들을 몇 종류의 값들로 구분지을 수 있을 때 Factor를 사용한다. 
 
 ```r
 bloodtype <- c('A', 'O', 'B', 'O', 'AB', 'AB', 'B')
@@ -349,8 +349,40 @@ bloodtype.new
 # [1] A  O  B  O  AB AB B 
 # Levels: A AB B O
 
+levels(bloodtype.new) # "A" "AB" "B" "O" 
 
 ```
+
+#### Easy Test
+
+- 벡터 생성하기  
+
+```r
+vec1 <- c(10, 20, 30, 40, 50)
+vec1
+```
+
+- 100부터 200까지 짝수로 증가하는 벡터 만들기
+
+```r
+vec2 <- seq(100, 200, 2)
+vec2
+
+```
+
+- TRUE 20개 만들기
+
+```r
+vec3 <- rep(TRUE, times=20)
+vec3
+
+```
+
+| `월` | jan | feb | mar | apr | may | jun | jul | aug | sep | oct | nov | dec |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `지각횟수` | 5 | 4 | 7 | 7 | 5 | 5 | 7 | 6 | 5 | 4 | 4 | 3 |
+
+
 
 
 ---
