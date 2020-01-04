@@ -136,10 +136,19 @@ num_a, num_A # 서로 다른 값
 데이터 분석 작업을 통해 접하게 되는 데이터는 대부분 1차원 배열 형태이거나 2차원 배열 형태이다. 
 1차원 배열 데이터는 데이터가 일직선상에 위치한다.
 
-교육생 10명의 키   
 
-| 159 | 175 | 178 | 177 | 183 | 178 | 165 | 181 | 179 | 159 |
-|---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+|학생 10명의 키 |
+|---|
+| 159 | 
+| 175 |
+| 178 |
+| 177 |
+| 183 |
+| 178 |
+| 165 |
+| 181 |
+| 179 |
+| 159 |
 
 - 교육생 10명의 키
 - 교육생 20명의 시험 성적
@@ -404,16 +413,16 @@ sum(late[7:12])
 
 데이터 분석 영역에서 분석가가 만나는 데이터는 2차원 구조를 가진 경우가 더 많다. R에서는 이를 위해 Matrix와 DataFrame 이라는 형태의 자료구조에 저장한 후 분석한다. 
 
-### Matrix(매트릭스)
-
 R에서는 하나의 주제를 가진 데이터를 1차원 형태로 나타내고 Vector라는 자료구조를 통해서 관리할 수 있지만 
 
-|  |  |  |  |
-|---|---|---|---|
-| `국어점수` | 20 | 30 | 40 |
+| `국어점수` |
+|---|
+| 20 |
+| 30 |
+| 40 |
 
 
-하나의 대상에 대해 여러 주제의 데이터를 수집했다면 이는 아래 표처럼 2차원 형태의 데이터로 나타내야 한다. 
+하나의 대상에 대해 여러 주제의 데이터를 수집했다면 이는 아래 표처럼 **2차원 형태의 데이터**로 나타내야 한다. 
 
 | 사람 | 국어 | 영어 | 수학 |
 |---|---|---|---|
@@ -421,10 +430,254 @@ R에서는 하나의 주제를 가진 데이터를 1차원 형태로 나타내�
 | `이순신` | 30 | 20 | 90 |
 | `을지문덕` | 40 | 60 | 10 |
 
+2차원 데이터는 표를 통해서 나타낼 수 있다.   
+행과 열이 교차로 만들어지는 영역을 Cell(셀)이라고 표현한다.  
+row 또는 observation이라고 한다. 
+column 또는 variable 이라고 한다.  
+
+| `row or col` | col | or | variable |
+|---|---|---|---|
+| `row` | row | or | observation |
+| `row` | row | or | observation |
+| `row` | row | or | observation |
+
+
+### Matrix(매트릭스)
+
+#### Matrix 만드는 법
+
+매트릭스는 2차원 형태의 자료구조이다. 매트릭스의 셀에는 동일한 자료형이 저장되어야 한다.
+
+```r
+m <- matrix(1:20, nrow = 4, ncol = 5, byrow = T)
+m
+```
+
+#### Matrix를 cbind, rbind 함수를 통해 제어하기
+
+cbind, rbind 함수를 통해 벡터와 벡터, 벡터와 매트릭스, 매트릭스와 매트릭스를 묶을 수 있다.
+이를 통해서 Matrix를 새롭게 만들 수 있다.
+
+```r
+x <- 1:4
+y <- 5:8
+m1 <- cbind(x, y)
+m2 <- rbind(x, y)
+m1
+m2
+
+m3 <- cbind(m, m1)
+m3
+
+```
+#### Matrix의 원소값 출력하기
+
+Matrix의 원소값에 접근하기 위해서는 매트릭스 변수명 뒤에 `[]` 2개의 인덱스를 전달하면 된다.
+그리고 2개의 인덱스 중 하나를 생략하면 행이나 열의 모든 값을 가져올 수 있다. 인덱스를 전달하지 않으면
+전체 매트릭스가 출력된다. 
+
+
+
+```r
+m <- matrix(1:16, nrow = 4, ncol = 4)
+m # m[] 과 같음, 인덱스를 전달하지 않은 것과 같은 값
+
+m[5, 5]
+m[4,]  
+m[,4]  
+
+
+
+
+```
+
+그리고 여러개의 인덱스를 추출하기 위해선 `c()`함수를 이용하거나 `:` 연산자(연속적인 숫자의 벡터를 만드는)를 이용할 수 있다.
+
+```r
+m[2, 1:3]
+m[1,c(1,2,4)]
+
+m[1:2, ]
+m[,c(2,4)]  
+```
+
+#### Matrix의 row, col에 이름 붙이기
+
+Matrix의 row, col에 이름 붙이면 데이터에 대해 더 쉽게 이해를 얻을 수 있다. 
+그리고 이름을 인덱스로 사용할 수 있다.
+
+```r
+m <- matrix(1:16, nrow = 4, ncol = 4)
+m
+rownames(m) <- c('1q', '2q', '3q', '4q')
+colnames(m) <- c('1c', '2c', '3c', '4c')
+m
+
+m['1q',]
+```
+
+
+
+
 
 ### DataFrame
 
+각기 다른 자료형을 저장하기 위해 DataFrame은 사용되며 `data.frame()` 함수를 이용해서 만들 수 있다. 
+보통 서로 다른 자료형의 벡터를 결합해서 생성한다. 주의사항은 데이터 프레임의 경우 열을 잘라서 보았을 때는 해당 열의 자료형이 동일해야 한다는 것이다. 
 
+```r
+medici <- c('은경', '득규', '건우')
+
+medici.rank <- data.frame(medici, rank)
+medici.rank
+
+medici.rank[,1]
+# [1] 은경 득규 건우
+# Levels: 건우 득규 은경
+```
+
+#### iris 데이터셋을 활용해서 DataFrame 제어
+
+```r
+iris
+iris[, c('Sepal.Length','Sepal.Width','Species')]
+iris[1:5,]
+
+iris[1:5, c(1,2,5)]
+```
+
+### Matrix와 DataFrame 제어
+
+#### Matrix와 DataFrame 에서 사용하는 기본적인 함수
+
+| 함수 | 설명 | 
+|---|---|
+| `dim()` | 행과 열의 개수 | 
+| `nrow()` | row의 개수 | 
+| `ncol()` | column의 개수 | 
+| `colnames()` | column의 이름 출력 |
+| `names()` | colnames와 결과 동일 | 
+| `head()` | 데이터셋의 앞부분 6row | 
+| `tail()` | 데이터셋의 뒷부분 6row |
+| `str()` | 요약된 정보 보기 | 
+| `unique()` | Factor 요소의 중복 제거 | 
+| `table()` | Factor의 요소별 개수 세기 |
+
+
+```r
+iris[, 5] # 품종의 데이터 150개를 보여줌
+unique(iris[, 5]) # 데이터가 몇개의 Levels 로 구성되어 있는지 보여줌
+table(iris[, 5]) # 그룹별로 몇개인지 개수를 보여줌
+
+```
+
+#### Matrix와 DataFrame 행과 열의 계산하는 함수
+
+| 함수 | 설명 | 
+|---|---|
+| `colSums()` | column의 합 | 
+| `colMeans()` | column의 평균 | 
+| `rowSums()` | row의 합 | 
+| `rowMeans()` | row의 평균 |
+
+
+```r
+colSums(iris[, -5])
+colMeans(iris[, -5])
+rowSums(iris[, -5])
+rowMeans(iris[, -5])
+```
+
+#### transpose Matrix 
+
+2차원 형태의 데이터의 행과 열의 방향을 바꾸기 위해 `t()`를 사용한다. 
+
+```r
+z1 <- matrix(1:20, nrow=5, ncol = 4, byrow = T)
+t(z1)
+
+t(iris)
+
+```
+
+
+#### Conditin DataFrame(조건에 맞는 행, 열값 추출)
+
+`subset()` 함수는 인자로 두 개의 값을 전달받는데, 첫 번째 인자로는 데이터셋을 받고, 두 번째 인자로는 데이터를 추출할 조건을 받는다.   
+**subset 함수는 DataFrame의 자료구조 사용가능하므로, Matrix에서도 사용하고 싶다면 자료구조를 변환해야 한다.**  
+
+```r
+IR.1 <- subset(iris, Species=='setosa')
+IR.1
+
+IR.2 <- subset(iris, Sepal.Length > 5.0 & Sepal.Width > 4.0)
+IR.2
+IR.2[, c(2, 4)]
+```
+
+#### Matrix 산술 연산
+
+Matrix간 산술 연산을 하기 위해서는 행과 열의 크기가 같아야 한다.
+
+```
+a <- matrix(1:20, 4, 5)
+b <- matrix(21:40, 4, 5)
+
+a - b
+a + b
+a * b
+```
+
+#### Matrix, DataFrame의 자료구조 확인 및 변환
+
+
+
+| 함수 | 설명 | 
+|---|---|
+| `class()` | 자료구조 확인 | 
+| `is.matrix()` | 자료가 Matrix인지 확인 | 
+| `is.data.frame()` | 자료가 data.frame인지 확인 | 
+
+
+
+```r
+class(iris) # "data.frame"
+is.matrix(iris) # FALSE
+is.data.frame(iris) # TURE
+
+c <- matrix(1:50, 10, 5)
+c
+class(c) # "matrix"
+is.matrix(c) # TRUE
+```
+
+| 함수 | 설명 | 
+|---|---|
+| `as.matrix()` | 문자열열은 제외하고 숫자형만 매트릭스로 변환 | 
+| `data.frame()` | matrix를 DataFrame으로 변환 | 
+
+DataFrame을 Matrix로 변환할 때 주의할 점은 DataFrame의 모든 값들이 동일한 자료형이어햐 한다는 것이다.
+
+```r
+st.df <- data.frame(state.x77)
+head(st.df)
+class(st.df)
+
+iris.m <- as.matrix(iris[, 1:4])
+head(iris.m)
+class(iris.m) # "matrix"
+```
+
+#### 데이터 프레임의 열을 제어할 때 주의사항
+
+```r
+iris$Species # 벡터, 데이터 프레임만 됨
+iris['Species'] #  DataFrame만 추출 가능
+iris[, 'Species'] # Vector, Matrix, DataFrame 가능
+
+iris[5] # DataFrame만 추출 가능
+iris[,5] # Vector, Matrix, DataFrame 가능
+```
 
 ---
 
