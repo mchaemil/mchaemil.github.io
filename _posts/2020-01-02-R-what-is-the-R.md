@@ -601,7 +601,7 @@ t(iris)
 ```
 
 
-#### Conditin DataFrame(조건에 맞는 행, 열값 추출)
+#### Condition DataFrame(조건에 맞는 행, 열값 추출)
 
 `subset()` 함수는 인자로 두 개의 값을 전달받는데, 첫 번째 인자로는 데이터셋을 받고, 두 번째 인자로는 데이터를 추출할 조건을 받는다.   
 **subset 함수는 DataFrame의 자료구조 사용가능하므로, Matrix에서도 사용하고 싶다면 자료구조를 변환해야 한다.**  
@@ -678,6 +678,67 @@ iris[, 'Species'] # Vector, Matrix, DataFrame 가능
 iris[5] # DataFrame만 추출 가능
 iris[,5] # Vector, Matrix, DataFrame 가능
 ```
+
+
+#### 데이터 프레임에 대한 예제
+
+```r
+state.x77
+class(state.x77) # matrix
+
+st <- data.frame(state.x77) # data.frame
+class(st)
+
+colnames(st)
+rownames(st)
+dim(st)
+str(st)
+
+# Florida의 모든 정보
+st['Florida', ]
+# Income 컬럼 정보 출력
+st['Income']
+# Texas의 Area
+st['Texas', 'Area']
+# Ohio의 Population와 Income
+st['Ohio', c('Population', 'Income')]
+# Population이 5000 이상인 곳
+subset(st, st['Population'] > 5000)
+
+# Income 이 4500이상인 주의 Population, Income, Area
+q14 <- subset(st, st['Income'] > 4500)
+q14[c('Population', 'Income', 'Area')]
+
+# Income 이 4500이상인 주의 개수
+nrow(subset(st, st['Income'] > 4500))
+
+# & 연산자를 활용한 다중 조건
+subset(st, st['Area'] >= 100000 & st['Frost'] >= 120)
+
+# & 연산자를 활용한 다중 조건
+subset(st, st['Population'] < 2000 & st['Murder'] < 12)
+
+# Illiteracy가 2.0 이상인 주의 평균수입
+q18 <- subset(st, st['Illiteracy'] >= 2.0)
+colMeans(q18['Income'])
+
+# 문맹률에 따른 평균 수입의 차이 구하기
+q19.more <- subset(st, st['Illiteracy'] >= 2.0)
+q19.less <- subset(st, st['Illiteracy'] < 2.0)
+colMeans(q19.more['Income'])
+colMeans(q19.less['Income'])
+
+colMeans(q19.less['Income']) - colMeans(q19.more['Income'])
+
+# Life.Exp 가 가장 높은 주(범위 확인 후 작성)
+rownames(subset(st, st['Life.Exp'] == 73.60))
+
+# Pennsylvania 보다 수입이 높은 주를 출력
+rownames(subset(st, st['Pennsylvania','Income'] < st['Income']))
+
+
+```
+
 
 ---
 
