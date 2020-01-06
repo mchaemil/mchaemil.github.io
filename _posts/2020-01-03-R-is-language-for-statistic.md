@@ -1,6 +1,6 @@
 ---
 layout: article
-title: R/DataAnalysis | R 두 번째 걸음!
+title: R/DataAnalysis | R 두 번째 걸음! R 통계를 위해 만들어진 프로그래밍 언어이다!
 tags: R
 
 ---
@@ -17,7 +17,7 @@ R은 2차원 데이터를 다룰 일이 많다. 대량의 데이터를 다룰 �
 
 - ifelse
 - apply
-
+- 사용자 정의 함수
 
 
 ---
@@ -65,6 +65,40 @@ apply(iris[, 1:4], 1, sum)
 apply(iris[, 1:4], 2, sum)
 
 ```
+
+
+
+### 사용자 정의 함수
+
+사용자 정의 함수를 생성하여 복잡한 작업을 해결하는 실마리를 얻을 수 있다. 
+R은 데이터 분석, 통계에 특화된 언어이므로 이와 관련된 다양한 함수를 제공하는데, 사용자 정의 함수를 통해 기능을 확장할 수 있다. 
+
+- 최소값과 최대값을 출력하는 함수 
+
+```r
+maxmin <- function(x) {
+  maxmin.max <- max(x)
+  maxmin.min <- min(x)
+  return(list(min=maxmin.min, max=maxmin.max))
+}
+
+v1 <- c(7,1,2,8,9)
+
+result <- maxmin(v1)
+result
+result$max
+result$min
+
+```
+
+
+
+
+
+
+
+
+---
 
 
 
