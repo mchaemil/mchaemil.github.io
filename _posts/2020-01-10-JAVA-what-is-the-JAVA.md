@@ -1,6 +1,6 @@
 ---
 layout: article
-title: JAVA | JAVA 수업내용 정리 
+title: JAVA | JAVA 학습한 내용 정리 
 tags: javascript
 comments: true
 
