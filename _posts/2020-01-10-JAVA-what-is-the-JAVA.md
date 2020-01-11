@@ -191,7 +191,7 @@ age = 25;
 - 대소문자 구분을 하고, 반드시 아래와 똑같이 쓰지 않으면 오류가 발생한다.
 
 
-```JAVA
+```java
 public class helloworld {
 	public static void main(String[] args) {
 	// 시행될 문장을 적는다.			
@@ -212,7 +212,7 @@ public class helloworld {
 
 New 는 생성자를 호출하는 역할을 한다 Reference와 객체는 new 라는 키워드를 통해서 연결되어 있다. New 라는 키워드를 이용해서 동적으로 객체를 생성한 다음 대입 할당 연산자를 통해서 연결하게 된다. 여기서 obj1 는 Reference를 가지게 되므로 참조변수가 된다.
 
-```JAVA
+```java
 Obj obj1 = new Obj();
 ```
 
@@ -222,7 +222,7 @@ Obj obj1 = new Obj();
 - 멤버를 참조할 때는 멤버참조연산자(`.`)를 사용한다
 - 예를 들면, `cm.coffeeMake();` 처럼 메소드를 호출해야 사용자가 정의한 메소드가 수행된다. 
 
-```JAVA
+```java
 CoffeeMachine cm = new CoffeeMachine()
 cm.coffeeMake()
 
