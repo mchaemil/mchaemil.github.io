@@ -15,8 +15,10 @@ comments: true
 ---
 **Today I Learend**
 
-- JAVA
-
+- Pass by Value VS Pass by Reference
+- Parameter/Arguement 를 작성하는 규칙
+- access modifier
+- OOP의 3대 특징
 
 
 ---
@@ -136,11 +138,11 @@ class People {
 }
 
 public class Main {
-	public static void main(String[] args) {
-		People p = new People();
-		p.age = 10; // private 에 접근할 수 없으므로 에러	
-		// public method 를 통해서만 접근 가능
-		System.out.println(p.getAge()); 
+  public static void main(String[] args) {
+	People p = new People();
+	p.age = 10; // private 에 접근할 수 없으므로 에러	
+	// public method 를 통해서만 접근 가능
+	System.out.println(p.getAge()); 
 		
 	}
 }
@@ -154,7 +156,7 @@ public class Main {
 
 
 ```java
-public class People {
+public class People {	
 	private int age;
 	private String name;
 	public int getAge() {
@@ -249,10 +251,10 @@ public class Main {
 
 ```java
 public void localVar(){
-   int a; 
-   int b = 10;
-   int c = b + a; // a는 오류가 발생한다.
-				  // a에 초기값을 지정해 줘야한다.
+ int a; 
+ int b = 10;
+ int c = b + a; // a는 오류가 발생한다.
+				// a에 초기값을 지정해 줘야한다.
 }
 ```
 
