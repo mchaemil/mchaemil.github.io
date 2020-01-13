@@ -74,6 +74,8 @@ comments: true
 - method(행위, member method)
 - member : member field, member method 
 
+#### Object 
+
 
 ### Java 환경설정
 
@@ -86,10 +88,36 @@ jdk: jdk8+(1.8)을 메인으로 사용, jdk13(option)
 | `openjdk` | 무료 | https://github.com/ojdkbuild/ojdkbuild |
 | `oraclejdk` | 무료, 특정 API를 사용하면 유로 | https://jdk.java.net/java-se-ri/8 |
 
-
 1. `openjdk`링크에서 Micro soft install version 을 설치한다. 
 	- java-1.8.0-openjdk-1.8.0.232-2.b09.ojdkbuild.windows.x86_64.msi (sha256)
 1. 환경 변수가 설정된 것을 확인하기
+
+#### 환경 변수 설정하는 또 다른 방법, JAVA_HOME
+
+시스템 변수에 `JAVA_HOME` 을 만들어서 path에 연결하는 방법도 있다.
+
+`C:\Program Files\ojdkbuild\java-1.8.0-openjdk-1.8.0.232-2` 을 시스템 변수 JAVA_HOME으로 설정
+
+> JAVA_HOME을 시스템 변수로 설정하면 더 간편하게 버전을 바꿀 수 있다는데 아직은 잘..! 모르겠다.
+
+
+```
+C:\Program Files\ojdkbuild\java-1.8.0-openjdk-1.8.0.232-2\bin
+C:\Program Files\ojdkbuild\java-1.8.0-openjdk-1.8.0.232-2\jre\bin
+```
+
+위의 주소를 아래처럼 변경
+
+```
+C:\Program Files\ojdkbuild\java-1.8.0-openjdk-1.8.0.232-2
+
+%JAVA_HOME%\bin
+%JAVA_HOME%\jre\bin
+```
+
+![주석 2020-01-13 190024](https://user-images.githubusercontent.com/40027211/72247069-773fea00-3637-11ea-8ea3-988590f33446.png)
+![주석 2020-01-13 190324](https://user-images.githubusercontent.com/40027211/72247070-773fea00-3637-11ea-885f-002869309fe3.png)
+
 
 #### IDE(Intergration Development Environment)
 
@@ -141,8 +169,7 @@ jdk: jdk8+(1.8)을 메인으로 사용, jdk13(option)
 - com.medici.java01
 - 파일 맨 상단에 작성을 한다. 
 - 패키지는 `.`밑으로 하나씩 폴더를 구성한다.
-  
-  
+- 패키지는 클래스를 묶어주기 위해 사용한다.
 
 ### 변수
 

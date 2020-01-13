@@ -1,12 +1,11 @@
 ---
 layout: article
-title: JAVA | JAVA is OOP 
+title: JAVA | JAVA is OOP language
 tags: JAVA
-comments: true
 
 ---
 
-## **Today What I Learend**  
+## Today What I Learend
 
 자바가 가지는 객체지향프로그래밍 언어이므로 이해해야 하는 규칙들이 있는데, 이에 대해 이해해보는 시간을 가졌다. 
 이를 학습하면서 자바에 대해 더 가까워지는 시간을 갖자!
@@ -19,7 +18,11 @@ comments: true
 - Parameter/Arguement 를 작성하는 규칙
 - access modifier
 - OOP의 3대 특징
-
+- 은닉성(Encapsulation)
+- 상속성(Inheritance)
+- 다형성(polymorphism)
+- 메모리 4대 특징
+- String class(문자열 클래스)
 
 ---
 
@@ -173,7 +176,6 @@ public class People {
 		// 바깥에서 가져오면 내거에 저장한다는 뜻
 	}
 }
-
 ```
 
 ```java
@@ -193,7 +195,6 @@ class Student extends People {
 		this.subject = subject;
 	}
 }
-
 ```
 
 ```java
@@ -205,12 +206,9 @@ public class Main {
 		s.getName();
 		
 		s.setsId(20010001);
-		s.getsId();
+		s.getsId();		
 	}
 }
-
-
-
 ```
 
 ### 다형성(polymorphism)
@@ -278,7 +276,6 @@ String str = "배새연";   // int a = 10
 str.repace("배","임");   // int c = a+20;
 System.out.println(str); // System.out.println(a);
 // 배새연, 할당을 하지 않으면 값이 변하지 않는다.
-
 ```
 
 #### Concatenation
