@@ -85,8 +85,8 @@ jdk: jdk8+(1.8)을 메인으로 사용, jdk13(option)
 
 | 종류 | 설명 | 링크 | 
 |---|---|---|
-| `openjdk` | 무료 | https://github.com/ojdkbuild/ojdkbuild |
-| `oraclejdk` | 무료, 특정 API를 사용하면 유로 | https://jdk.java.net/java-se-ri/8 |
+| `openjdk` | 무료 | [openjdk link](https://github.com/ojdkbuild/ojdkbuild) |
+| `oraclejdk` | 무료, 특정 API를 사용하면 유로 | [oraclejdk link](https://jdk.java.net/java-se-ri/8) |
 
 1. `openjdk`링크에서 Micro soft install version 을 설치한다. 
 	- java-1.8.0-openjdk-1.8.0.232-2.b09.ojdkbuild.windows.x86_64.msi (sha256)
@@ -143,19 +143,38 @@ C:\Program Files\ojdkbuild\java-1.8.0-openjdk-1.8.0.232-2
 
 
 
-#### 프로그래밍 코드를 표기하는 약속(명명법)
+#### 자바에서 프로그래밍 코드를 표기하는 약속(명명법)
 - 프로그램을 구현하면서 지켜야 할 규칙이나, 오류가 발생하지는 않는다.
 - 하지만 프로그래머들의 규약이라서 반드시 지키지 않으면 혼난다!
 - 파스칼(pascal) : 처음에 시작할 때 대문자 그다음 소문자 의미 바뀌면 대문자 소문자
  ex) class CoffeeMachine 클래스, 인터페이스
 - 카멜(camel) : 처음에 시작할 때 소문자 의미 바뀔때 첫글자 대문자 소문자
- ex) public void makeCoffee(); 메소드, 변수명
+	- 메소드, 변수명
+
+```java
+public void makeCoffee(); //메소드, 변수명
+```
+
 - 헝가리언(hungarian) : 타입 축약 + 이름
- ex) txtName, lblNumber 타입을 줄여서 이름과 붙여사용, GUI(Swing)
+	- 타입을 줄여서 이름과 붙여사용, GUI(Swing)
+```java
+txtName, lblNumber 
+```
+
 - 전체 대문자 : 상수, 변하지 않는 값을 지정할 때
- ex) Math.PI = 3.14, System.out.println(Math.PI); 3.14가 나온다.
+
+```java
+final String ROLE = "Manager";
+Math.PI = 3.14 // PI는 상수
+System.out.println(Math.PI); //3.14가 나온다.
+```
+
 - 전체 소문자 : 예약어, 키워드, 패키지
- ex) public, new, void, class , com.sk.sales
+
+```java
+public, new, void, class // 예약어
+ham.study.java.play369 // 패키지 이름
+```
   
   
 
@@ -236,15 +255,24 @@ public class helloworld {
 
 ### new 키워드
  
-**new는 객체를 생성할 때 사용하는 키워드이다.**
+**new는 클래스로부터 객체를 생성할 때 사용하는 키워드이다.**
 - 객체를 생성하는 이유? 객체를 사용하기 위해서 
 
-New 는 생성자를 호출하는 역할을 한다 Reference와 객체는 new 라는 키워드를 통해서 연결되어 있다. New 라는 키워드를 이용해서 동적으로 객체를 생성한 다음 대입 할당 연산자를 통해서 연결하게 된다. 여기서 obj1 는 Reference를 가지게 되므로 참조변수가 된다.
+`new`연산자 뒤에는 생성자(객체 생성시 초기화)가 오는데, 생성자는 `클래스의 이름`과 `()` 호출 연산자의 형태로 되어 있다. 물건이 어디 있는지 모르면 필요할 때 사용할 수 없는 것처럼 객체를 사용하기 위해서는 생성한 객체의 주소를 누군가가 알려주어야 하는데, `new`연산자는 힙(Heap) 영역에 객체를 생성시킨 후, 주소를 리턴하도록 되어 있다.  
+이렇게 리턴 받은 주소를 참조 타입인 클래스 변수에 저장해두면, 변수를 통해 객체를 사용할 수 있다.
+
+> 생성자를 호출해서 객체를 생성시킨다. 클래스에 오버로딩된 생성자가 한 개라도 있다면, `컴파일러`는 `Default 생성자`를 추가하지 않음! 생성자 오버로딩(명시적 생성자)을 하는 이유는 객체를 다양하게 초기화하기 위해서이다. 
 
 ```java
-Obj obj1 = new Obj();
-```
+People p;
+p = new People();
 
+// 객체를 생성하는 코드를 한 줄로 작성
+People p2 = new People();
+``` 
+
+```java
+```
 
 #### 객체를 사용하는 방법
 - 참조변수는 그 자체가 값이 아니므로 어떤 식으로든 가공을 해야 한다. 
@@ -262,21 +290,42 @@ cm.coffeeMake()
 
 
 ### method
-  - 데이터를 가지고 어떤 로직을 만들어서 데이터를 출력하거나 넣을 때 사용
-  - return O
-  - void 를 쓰지 않으면 값을 사용하고 끝낸다. 
+- method는 필드를 읽고 수정하기도 하지만 다른 객체를 생성해서 다양한 기능을 수행하는 역할도 한다.
+- 메소드는 객체간의 **데이터를 전달하기 위한 수단**으로 사용된다. 외부로부터 매개값을 받을 수도 있고, 실행 후 어떤 값을 리턴할 수도 있다.
+- 데이터를 가지고 어떤 로직을 만들어서 데이터를 출력하거나 넣을 때 사용
 
-```JAVA
-int count() {
-  int cup = 1000/100;
-  return cup;
+
+#### method return type
+
+리모컨에서 파워버튼과 음량 조절 버튼이 있을 때, 파워버튼은 전원만 끄거나 켜면 되므로 따로 결과를 되돌려줄 필요가 없다. 반면 음량조절 버튼은 음량을 줄이거나 높였을 때 얼만큼 줄이고 높였는지, 그래서 현재 상태(값)은 어떠한지 결과를 되돌려줄 필요가 있다. 이를 메소드의 리턴 타입에 비추어본다면 파워버튼을 `void` 타입, 음량조절 버튼을 `return type`으로 생각해볼 수 있지 않을까
+
+메소드 실행의 결과값을 호출한 곳으로 전달해야 하는 경우에는 리턴값이 필요하다. 이 때는 리턴값의 `type`이 와야하며, 메소드의 실행 이후 바로 종료되어 리턴값이 필요 없다면 `void`가 와야 한다. 
+
+```
+returnType methodName(parameter) {
+	// Context
 }
 ```
 
+- return O
+- add() 메소드는 리턴값이 있으므로 저장할 변수가 있어야 한다.
+- 다만! 리턴값을 받을 필요가 없고, 메소드가 실행되는 것이 중요하다면 변수 선언이 필요하지 않을 수 있다.
+
+```java
+int add(int a, int b) {
+  int result = a + b;
+  return result;
+}
+```
+
+```java
+int sum = add(3, 5)
+```
+
 - return X, 반환하는 자료형이 없으면 void를 명시한다.
-  - void 넣는 순간 리턴을 받지 않겠다고 답함..!  
-  
-```JAVA
+- void 넣는 순간 리턴값이 없다고 답하는 것이므로 변수에 저장할 내용이 없다.
+
+```java
 void isSarangOk() {
   System.out.println(man > woman && money > 10 ? "짝짝짝! 사랑이 어루어졌어요..!": "ㅠㅠ 이별했음.. 그때 사랑 ㄸㅁㅇ");
 }

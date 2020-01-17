@@ -1,6 +1,6 @@
 ---
 layout: article
-title: JAVA | JAVA 학습한 내용 정리 
+title: JAVA | JAVA 는 계층 구조를 가진 언어이다!  
 tags: JAVA
 comments: true
 
@@ -12,7 +12,7 @@ comments: true
 음...!  그래서 verbose 하며..! 큰 구조에 좋은 프로그래밍 언어인 것일까?
 
 
-ps. **[Write in Go](https://www.youtube.com/watch?v=LJvEIjRBSDA)** 링크의 동영상에서는 JAVA is verbose, Python's too slow.. ㅋㅋㅋ 그러면서 Write in Go 를 외치는데 재밌는 거 같다. 이러한 작은 고민과 생각들이 모여서 프로그래밍에 대한 이해를 더욱 키울 수 있을 것 같다. 충분히 해볼 법한 고민..!
+ps. **[Write in Go](https://www.youtube.com/watch?v=LJvEIjRBSDA)** 링크의 동영상에서는 JAVA is verbose, Python's too slow.. ㅋㅋㅋ 그러면서 Write in Go 를 외치는데 시사하는 점도 있고, 재미도 있는 것 같다. 이러한 작은 고민과 생각들이 모여서 프로그래밍에 대한 이해를 더욱 키울 수 있을 것 같다. 충분히 해볼 법한 고민..!
 
 ---
 **Today I Learend**
@@ -62,20 +62,29 @@ jar로 만든다음에 import해서 가져온다.
 ### 다형성 발생원리 3가지
 
 - 부모의 이름으로 자식을 생성할 수 있다.
+
 ```java
 P p = new S();
 ```
 
 - 부모의 이름으로 자식을 받을 수 있다. 
+
 ```java
 P p1 = new P();
 S s = new S();
+P p1 = s
 ```
 
-- 부모의 메소드로 자식의 메소드를 호출할 수 있다. 
-  (단, 상속과 오버라이딩이 되어있을 경우 가능하다.)
+- 부모의 메소드로 자식의 메소드를 호출할 수 있다. (단, 상속과 오버라이딩이 되어있을 경우 가능하다.)
+- 들고는 있지만 설계도가 없었다. 그래서 설계도에 올리면 쓸 수 있
+다.
+
 ```java
-P p2 = new S();
+
+Student s = new Student();
+People p2 = s2;
+Student s3 = (Student)p2;
+
 ```
 
 (참고)
@@ -104,9 +113,9 @@ public class Car {
 
 ```java
 public abstract class MakeCoffee {
-	// field
-	// constructor
-	// method
+  // field
+  // constructor
+  // method
 }
 ```
 
@@ -136,6 +145,9 @@ public abstract void make();
 // COUNT 는 추상메소드로만 구현
 
 다형성 부모의 이름으로 자식의 메소드를 호출할 수 있다. 
+
+
+학생, 교수, 직원 등의 User로 추상 클래스를 만들고 여기서 분기를 하여 타입이ㅔ 맞는 User에 
 
 
 ### final 키워드 
@@ -213,6 +225,88 @@ final 키워드는 위의 3가지 경우에서 사용할 수 있다
 | +make():void | 
 | +makeRight():void | 
 | +makeLeft():void | 
+
+
+
+### 0117 JAVA REVIEW
+
+팀별로 오늘의 규칙을 조사해서 정리해서 간단하게 텍스트로 발표하기
+조사되는 상태까지 해보고 마무리한다. 
+
+
+
+63. JCF(Java Collection Framework)
+
+- 자료구조
+- 데이터를 구조적으로 정리하는 방법
+
+
+
+Collection
+ 
+- 순서
+
+| Set | List | Map | 
+|---|---|---|
+| 순서X | 순서O | 순서X, key,value가 쌍으로 존재 | 
+| 중복X | 중복O | key 중복X | 
+| iter pattern | index | key*value | 
+
+
+HasSet    ArrayList     HashMap
+XXXSet    LinkedList    XxxMap
+          Vector
+
+
+
+
+### CardGame
+
+Card 게임 만들기
+num: A, 2,3,4,5,6,7,8,9,T,J,Q,K
+
+
+```
+[S4][C5][SA][CJ][T6][CJ][CK][H5][H9][H9]
+[C5][C7][H7][TJ][S4][CT][T5][H4][CQ][C9]
+[H5][H3][H7][C6][H4][H5][SJ][C2][HQ][HJ]
+[T2][C7][T2][H4][H3][CJ][T3][S9][C8][C2]
+[S2][C9][SQ][S8][C4][H6][T5][C7][HK][TT]
+[S5][ST]
+```
+
+
+음..! 
+요구사항을 찾아라..!
+
+
+
+64. Vector/ ArrayList
+
+- Vector는 동기화되어있는 list 자료구조 
+- ArrayList 는 비동기화 되어있는 list 자료구조
+
+동기화는 Vector 라는 그릇에 데이터를 저장할 때 다른 사람이 접근 못하게 막고 데이터를 처리하는 형태
+비동기는 ArrayList 라는 그릇에 데이터를 저장할 때 다른 사람이 접근해서 데이터가 깨질 수도 있음. 동시에 여러 사람이 하나의 데이터에 접근할 수 있는 경우가 생기면 Vector를 사용하는 것이 더 좋음
+
+65. 콘솔에서 입력받는 방법
+
+```java
+import java.util.Scanner;
+Scanner scan = new Scanner(System.in);
+int num = scan.nextInt();
+```
+
+## [팀별 미니 프로젝트]  
+카드 게임 만들기 
+1) ArrayList or 배열중에 어떤 클래스를 사용할 것인지 팀별로 정하고
+2) 어떤 카드게임을 할지 게임을 해보면서 규칙을 찾아내기 
+3) 오늘 찾아낸 규칙을 5시에 텍스트나 ppt로 발표할것
+4) 만들어진 게임은 다음주 화요일 4시에 발표할것!!
+
+
+
+
 
 
 
