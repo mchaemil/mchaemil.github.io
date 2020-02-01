@@ -1,8 +1,7 @@
 ---
 layout: article
 title: linux/CentOS8 | linux 학습한 내용 정리 
-tags: javascript
-comments: true
+tags: linux
 
 ---
 
