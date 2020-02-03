@@ -66,7 +66,6 @@ localStorage.setItem(TODOS_LS, JSON.stringify(toDos))
 ### localStorage 활용
 
 #### JSON.stringify
-
 `localStorage.setItem(TODOS_LS, toDos)`처럼 `setItem()`메소드의 인자에 자바스크립트 데이터를 직접 넣으면 `LocalStorage`에는 `[object Object]`처럼 데이터가 들어간다.
 
 왜냐하면 `LocalStorage`에는 자바스크립트의 data를 저장할 수 없기 때문이다. `LocalStorage`는 모든 데이터를 `string`으로 저장한다. 그래서 자바스크립트 `object`가 `string`이 되도록 바꾸고 저장해야 한다. 이를 위해서 `JSON.stringify()`메소드를 사용해야 하는데, `JSON.stringify()`는 인자로 전달된 자바스크립트 `object`를 `string`으로 바꿔준다.
@@ -78,13 +77,11 @@ function saveToDos(){
 ```
 
 #### JSON.parse
-
-null이 아닐 때만 해주면 된다.
-
 `localStorage.getItem()`으로 데이터를 불러온 경우 불러온 데이터가 `string`이라는 문제가 생긴다! 이를 자바스크립트에서 활용하기 위해서는 `JSON(Javascript Object Notation)`을 사용해야 한다! JSON을 통해 string을 object로, object를 string으로 변경할 수 있다.
 
 `JSON.parse()`를 사용하면 데이터를 가져올 때 자바스크립트가 다룰 수 있도록 `string`을 `object`로 바꿔준다!
 
+아래는 `localStorage`에서 가져온 코드를 `JSON.parse()`메서드를 통해 `string`을 `object`로 바꾸었다.
 
 ```javascript
 function loadToDos() {
@@ -98,9 +95,6 @@ function loadToDos() {
   } 
 }
 ```
-
-
-
 
 
 
