@@ -14,8 +14,9 @@ tags: javascript
 ---
 **Today I Learend**
 - 함수형 프로그래밍
-
-
+- 데이터 타입
+- Execution context
+- call stack
 
 ---
 
@@ -59,6 +60,37 @@ var object = {
 }
 object.arr = 'str';
 ```
+
+### Execution context
+
+실행 컨텍스트는 함수를 실행할 때 필요한 환경정보를 담은 객체를 말한다.
+
+실행 컨텍스트는 아래의 뜻을 가지고 있다.
+- 코드 흐름상에서 배경이 되는 조건/환경
+- 코드 맥락상의 조건
+- 동일한 환경을 지니는 코드뭉치를 실행할 때 필요한 조건
+
+자바스크립트는 동일한 조건이나 환경을 지닐 수 있는 조건이 함수 or 전역공간밖에 없다.
+전역공간 또한 함수로 여긴다면..! 오직 환경은 함수 하나 뿐!이다.
+
+### call stack
+call stack은 현재 어떤 함수가 동작하고 있는지, 다음에 어떤 함수가 호출되어야 하는지 등을 제어하는 자료구조이다.
+
+아래의 두 Environment는 같은 데이터를 가지고 있지만 변경의 유무에 의해 차이가 생긴다. 
+
+| Environment | 설명 |
+|---|---|
+| VariableEonment | 값을 캡쳐했을 때, 값이 바뀌지 않음 |
+| LexicalEnvironment | 값의 변경을 반영하는 것 |
+
+값이 바뀌지 않는 `VariableEonment`보다 값이 바뀌는 `LexicalEnvironment`에 주목하면..!
+
+| Environment | 설명 |
+|---|---|
+| environmentRecord | 현재 콘텍스트의 식별자 정보, HOISTING이라는 추상적 개념으로 불림 |
+| outerEnvironmentReference | 현재 문맥에 관련 있는 외부 식별자 정보 => scope chain 현상을 만듦 |
+| thisBinding |  |
+
 
 
 ### 화살표 함수
